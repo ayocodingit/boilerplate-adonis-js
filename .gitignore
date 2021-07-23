@@ -10,5 +10,5 @@ tmp
 # The development sqlite file
 database/*.sqlite
 
-coverage
+report
 .nyc_output
