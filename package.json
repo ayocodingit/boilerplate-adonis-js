@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "nyc --all node ace test",
-    "coverage": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=text-lcov | codeclimate-test-reporter"
+    "coverage": "npm run test && nyc report --reporter=text-lcov | coveralls -v report"
   },
   "keywords": [
     "adonisjs",
@@ -32,7 +32,6 @@
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {
-    "coveralls": "^3.1.1",
     "nyc": "^15.1.0"
   },
   "autoload": {
