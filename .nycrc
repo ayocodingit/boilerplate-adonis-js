@@ -2,7 +2,7 @@
   "all": true,
   "include": ["app/**"],
   "reporter": [
-    "html",
+    "html"
   ],
   "report-dir": "report"
 }
