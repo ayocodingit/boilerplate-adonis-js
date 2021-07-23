@@ -34,8 +34,3 @@ jobs:
     - run: sudo npm install
     - run: cp .env.example .env
     - run: sudo npm run test
-    - uses: paambaati/codeclimate-action@v2.7.5
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORT_ID }}
-      with:
-        coverageCommand: sudo npm run coverage
