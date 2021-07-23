@@ -3,7 +3,8 @@
   "include": ["app/**"],
   "reporter": [
     "json",
-    "text-summary"
+    "text-summary",
+    "text-lcov"
   ],
   "report-dir": "coverage"
 }
