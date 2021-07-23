@@ -1,6 +1,9 @@
 {
   "all": true,
   "include": ["app/**"],
-  "reporter": "html",
+  "reporter": [
+    "json",
+    "text-summary"
+  ],
   "report-dir": "coverage"
 }
