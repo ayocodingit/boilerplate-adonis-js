@@ -2,9 +2,7 @@
   "all": true,
   "include": ["app/**"],
   "reporter": [
-    "json",
     "html",
-    "text-lcov"
   ],
   "report-dir": "report"
 }
