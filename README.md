@@ -8,16 +8,13 @@ This is the boilerplate for creating an API server in AdonisJs, it comes pre-con
 4. Lucid ORM
 5. Migrations and seeds
 
-## Setup
+## Development
 
-Use the adonis command to install the blueprint
-
-```bash
-adonis new yardstick --api-only
-```
-
-or manually clone the repo and then run `npm install`.
-
+## Setup for Development
+- Download latest release from https://github.com/ayocodingit/boilerplate-adonis-js.git
+- run `npm install` for installing dependencies.
+- Copy `.env.example` to `.env` and set your database connection details
+- Run `npm run start`
 
 ### Migrations
 
