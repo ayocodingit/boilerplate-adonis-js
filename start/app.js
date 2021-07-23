@@ -21,6 +21,7 @@ const providers = [
   'adonis-sentry/providers/Sentry',
   '@adonisjs/validator/providers/ValidatorProvider',
   '@adonisjs/shield/providers/ShieldProvider',
+  '@adonisjs/vow/providers/VowProvider',
   path.join(__dirname, "..", "providers/ExistProvider")
 ]
 
