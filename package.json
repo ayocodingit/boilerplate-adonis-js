@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node ace test"
+    "test": "nyc node ace test"
   },
   "keywords": [
     "adonisjs",
@@ -30,7 +30,9 @@
     "adonis-sentry": "^2.1.4",
     "sqlite3": "^5.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nyc": "^15.1.0"
+  },
   "autoload": {
     "App": "./app"
   }
