@@ -25,7 +25,6 @@
     "@adonisjs/framework": "^5.0.9",
     "@adonisjs/ignitor": "^2.0.8",
     "@adonisjs/lucid": "^6.1.3",
-    "@adonisjs/shield": "^1.1.0",
     "@adonisjs/validator": "^5.1.0",
     "@adonisjs/vow": "^1.0.17",
     "adonis-sentry": "^2.1.4",
