@@ -32,5 +32,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: sudo npm install
-    - run: cp .env.example .env
     - run: sudo npm run test

@@ -3,7 +3,6 @@
   "include": ["app/**"],
   "reporter": [
     "html",
-    "text-summary"
   ],
   "report-dir": "report"
 }
