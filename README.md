@@ -1,6 +1,6 @@
 # Adonis API application
 
-the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
+the boilerplate for creating an API server in [AdonisJs](https://legacy.adonisjs.com/), it comes pre-configured with.
 
 1. Bodyparser
 2. Authentication
