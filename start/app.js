@@ -26,6 +26,8 @@ const providers = [
   '@adonisjs/mail/providers/MailProvider',
   '@adonisjs/framework/providers/ViewProvider',
   "adonis-scheduler/providers/SchedulerProvider",
+  '@adonisjs/session/providers/SessionProvider',
+  '@adonisjs/shield/providers/ShieldProvider',
   path.join(__dirname, '..', 'providers', 'ExistProvider')
 ]
 
