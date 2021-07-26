@@ -37,10 +37,10 @@
     "adonis-scheduler": "^3.0.2",
     "adonis-sentry": "^2.1.4",
     "jsonwebtoken": "^8.5.1",
-    "nodemon": "^2.0.12",
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {
+    "nodemon": "^2.0.12",
     "nyc": "^15.1.0"
   },
   "autoload": {
