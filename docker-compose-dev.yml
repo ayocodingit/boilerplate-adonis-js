@@ -43,6 +43,8 @@ services:
       - .:/app
       - /app/node_modules
     restart: 'always'
+    environment:
+      PORT: 3330
     ports:
       - "3330:3330"
     depends_on:
