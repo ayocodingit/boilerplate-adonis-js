@@ -23,6 +23,6 @@ module.exports = {
         app,
       }),
     ],
-    tracesSampleRate: 1.0
+    tracesSampleRate: parseFloat(Env.get('SENTRY_TRACE_SAMPLE_RATE', 0.0))
   }
 }
