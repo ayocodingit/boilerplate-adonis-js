@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  adonis-mysql:
+    image: mysql:5.7
+    container_name: "${APP_NAME}_MYSQL"
+    platform: 'linux/x86_64'
+    ports:
+      - '3366:3306'
+    volumes:
+      - $PWD/data:/var/lib/mysql
+    restart: 'always'
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - adonis-network
+
+  adonis-phpmyadmin:
+    container_name: "${APP_NAME}_PMA"
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - adonis-mysql
+    environment:
+      PMA_HOST: adonis-mysql
+    ports:
+      - '8585:80'
+    restart: 'always'
+    volumes:
+      - /phpmyadmin
+    networks:
+      - adonis-network
+
+  adonis-app:
+    container_name: "${APP_NAME}_APP"
+    build:
+      context: .
+      dockerfile: dockerfile-dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    restart: 'always'
+    ports:
+      - "3333:3333"
+    depends_on:
+      - adonis-mysql
+    networks:
+      - adonis-network
+
+networks:
+  adonis-network:
