@@ -10,6 +10,10 @@ the boilerplate for creating an API server in [AdonisJs](https://legacy.adonisjs
 
 ## Development
 
+
+## Quick Start Running On Locally by Docker 
+`docker-compose -f docker-compose-dev.yml up`
+
 ## Setup for Development
 - Download latest release from https://github.com/ayocodingit/boilerplate-adonis-js.git
 - run `npm install` for installing dependencies.
