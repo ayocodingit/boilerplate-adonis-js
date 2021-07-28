@@ -3,6 +3,7 @@
 const BaseExceptionHandler = use('BaseExceptionHandler')
 const Logger = use('Logger')
 const sentry = use('Sentry')
+const { StatusCodes } = require('http-status-codes')
 
 /**
  * This class handles all exceptions thrown during
@@ -37,7 +38,7 @@ class ExceptionHandler extends BaseExceptionHandler {
    * @return {void}
    */
   async report (error, { request }) {
-    if (error.status >= 500) {
+    if (error.status >= StatusCodes.INTERNAL_SERVER_ERROR) {
       Logger.info({
         'method': request.method(),
         'url': request.url(),

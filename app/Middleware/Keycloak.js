@@ -4,6 +4,7 @@
 
 const Config = use('Config')
 const jwt = require('jsonwebtoken')
+const { StatusCodes } = require('http-status-codes')
 
 class Keycloak {
   /**
@@ -22,7 +23,7 @@ class Keycloak {
         await next()
     } catch(err) {
         session.forget('user')
-        return response.status(401).json({error: err.message})
+        return response.status(StatusCodes.UNAUTHORIZED).json({error: err.message})
     }
   }
 

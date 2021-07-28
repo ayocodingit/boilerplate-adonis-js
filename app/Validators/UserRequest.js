@@ -2,6 +2,7 @@
 
 const { formatters } = use('Validator')
 const Antl = use('Antl')
+const { StatusCodes } = require('http-status-codes')
 
 class UserRequest {
 
@@ -30,7 +31,7 @@ class UserRequest {
   }
 
   async fails (errorMessages) {
-    return this.ctx.response.status(422).json(errorMessages)
+    return this.ctx.response.status(StatusCodes.UNPROCESSABLE_ENTITY).json(errorMessages)
   }
 }
 
