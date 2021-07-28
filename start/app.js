@@ -28,6 +28,8 @@ const providers = [
   "adonis-scheduler/providers/SchedulerProvider",
   '@adonisjs/session/providers/SessionProvider',
   '@adonisjs/shield/providers/ShieldProvider',
+  'adonisjs-queue/providers/QueueProvider',
+  'adonisjs-queue/providers/JobProvider',
   path.join(__dirname, '..', 'providers', 'ExistProvider')
 ]
 
@@ -42,7 +44,8 @@ const providers = [
 */
 const aceProviders = [
   '@adonisjs/lucid/providers/MigrationsProvider',
-  "adonis-scheduler/providers/CommandsProvider"
+  "adonis-scheduler/providers/CommandsProvider",
+  'adonisjs-queue/providers/JobCommandsProvider'
 ]
 
 /*

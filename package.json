@@ -15,7 +15,7 @@
     "adonisjs",
     "adonis-app"
   ],
-  "author": "",
+  "author": "ayocodingit",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
@@ -36,8 +36,8 @@
     "@adonisjs/vow": "^1.0.17",
     "adonis-scheduler": "^3.0.2",
     "adonis-sentry": "^2.1.4",
-    "jsonwebtoken": "^8.5.1",
-    "sqlite3": "^5.0.2"
+    "adonisjs-queue": "^0.1.10",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.12",
