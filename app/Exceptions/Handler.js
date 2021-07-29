@@ -2,8 +2,9 @@
 
 const BaseExceptionHandler = use('BaseExceptionHandler')
 const Logger = use('Logger')
-const sentry = use('Sentry')
-const { StatusCodes } = require('http-status-codes')
+const Sentry = use('Sentry')
+const Config = use('Config')
+const { StatusCodes, getReasonPhrase } = require('http-status-codes')
 
 /**
  * This class handles all exceptions thrown during
@@ -24,6 +25,14 @@ class ExceptionHandler extends BaseExceptionHandler {
    * @return {void}
    */
   async handle (error, { request, response }) {
+
+    if (
+      error.status >= StatusCodes.INTERNAL_SERVER_ERROR &&
+      Config.get('env') === 'production'
+    ) {
+      error.message = getReasonPhrase(error.status)
+    }
+
     response.status(error.status).json(error.message)
   }
 
@@ -47,7 +56,7 @@ class ExceptionHandler extends BaseExceptionHandler {
         'date': new Date(),
         'message': error.message
       })
-      sentry.captureException(error)
+      Sentry.captureException(error)
     }
   }
 }
