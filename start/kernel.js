@@ -17,7 +17,7 @@ const globalMiddleware = [
   'App/Middleware/ConvertEmptyStringsToNull',
   'Adonis/Middleware/Session',
   'Adonis/Middleware/Shield',
-  'App/Middleware/SentryTransaction',
+  'App/Middleware/SentryTransaction'
 ]
 
 /*

@@ -12,19 +12,18 @@ class SentryTransaction {
    * @param {Function} next
    */
   async handle ({ request }, next) {
-
     const transaction = Sentry.startTransaction({
-      op: "transaction",
-      name: request.url(),
-    });
+      op: 'transaction',
+      name: request.url()
+    })
 
     Sentry.configureScope(scope => {
-      scope.setSpan(transaction);
-    });
+      scope.setSpan(transaction)
+    })
 
     await next()
 
-    transaction.finish();
+    transaction.finish()
   }
 }
 

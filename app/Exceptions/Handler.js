@@ -24,8 +24,7 @@ class ExceptionHandler extends BaseExceptionHandler {
    *
    * @return {void}
    */
-  async handle (error, { request, response }) {
-
+  async handle (error, { response }) {
     if (
       error.status >= StatusCodes.INTERNAL_SERVER_ERROR &&
       Config.get('env') === 'production'
@@ -49,12 +48,12 @@ class ExceptionHandler extends BaseExceptionHandler {
   async report (error, { request }) {
     if (error.status >= StatusCodes.INTERNAL_SERVER_ERROR) {
       Logger.info({
-        'method': request.method(),
-        'url': request.url(),
-        'status': error.status,
+        method: request.method(),
+        url: request.url(),
+        status: error.status,
         'user-agent': request.headers()['user-agent'],
-        'date': new Date(),
-        'message': error.message
+        date: new Date(),
+        message: error.message
       })
       Sentry.captureException(error)
     }

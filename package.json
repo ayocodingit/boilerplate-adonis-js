@@ -9,7 +9,9 @@
     "dev": "nodemon server.js",
     "scheduler": "node ace run:scheduler",
     "test": "nyc --all node ace test",
-    "coverage": "npm run test && nyc report --reporter=text-lcov | node ./bin/coveralls.js --verbose"
+    "coverage": "npm run test && nyc report --reporter=text-lcov | node ./bin/coveralls.js --verbose",
+    "lint": "eslint --ext .js .",
+    "lint:fix": "eslint --fix --ext .js ."
   },
   "keywords": [
     "adonisjs",
@@ -43,8 +45,14 @@
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
     "nodemon": "^2.0.12",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "prettier": "^2.3.2"
   },
   "autoload": {
     "App": "./app"

@@ -32,7 +32,7 @@ module.exports = {
       user: Env.get('MAIL_USERNAME'),
       pass: Env.get('MAIL_PASSWORD'),
       from: Env.get('MAIL_FROM_ADDRESS'),
-      name: Env.get('MAIL_FROM_NAME'),
+      name: Env.get('MAIL_FROM_NAME')
     },
     maxConnections: 5,
     maxMessages: 100,

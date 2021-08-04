@@ -2,8 +2,8 @@
 
 const Env = use('Env')
 const Sentry = require('@sentry/node')
-const Tracing = require("@sentry/tracing")
-const { ioc:app } = require('@adonisjs/fold')
+const Tracing = require('@sentry/tracing')
+const { ioc: app } = require('@adonisjs/fold')
 
 module.exports = {
 
@@ -20,8 +20,8 @@ module.exports = {
     integrations: [
       new Sentry.Integrations.Http({ tracing: true }),
       new Tracing.Integrations.Express({
-        app,
-      }),
+        app
+      })
     ],
     tracesSampleRate: parseFloat(Env.get('SENTRY_TRACE_SAMPLE_RATE', 0.0))
   }

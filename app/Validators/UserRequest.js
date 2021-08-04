@@ -5,14 +5,13 @@ const Antl = use('Antl')
 const { StatusCodes } = require('http-status-codes')
 
 class UserRequest {
-
   get validateAll () {
     return true
   }
 
   get rules () {
     return {
-      email: `required|email|unique:users,email,id,NULL`,
+      email: 'required|email|unique:users,email,id,NULL',
       password: 'required'
     }
   }
