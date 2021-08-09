@@ -31,6 +31,7 @@ const providers = [
   'adonisjs-queue/providers/QueueProvider',
   'adonisjs-queue/providers/JobProvider',
   '@radmen/adonis-lucid-soft-deletes/providers/SoftDeletesProvider',
+  '@adonisjs/redis/providers/RedisProvider',
   path.join(__dirname, '..', 'providers', 'ExistProvider')
 ]
 
