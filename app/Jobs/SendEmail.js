@@ -9,7 +9,7 @@ class SendEmail extends Job {
     return 'low'
   }
 
-  constructor (emailAddress, emailFrom, emailSubject, emailBody, payloads) {
+  constructor (emailAddress, emailFrom, emailSubject, emailBody, payload) {
     super(arguments)
 
     this.timeOut = 100 // seconds
@@ -28,7 +28,7 @@ class SendEmail extends Job {
     let result = null
 
     try {
-      result = await Mail.send(_data.emailBody, _data.payloads, (message) => {
+      result = await Mail.send(_data.emailBody, _data.payload, (message) => {
         message.to(_data.emailAddress)
         message.from(_data.emailFrom)
         message.subject(_data.emailSubject)
