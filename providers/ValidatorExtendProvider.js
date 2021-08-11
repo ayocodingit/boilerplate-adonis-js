@@ -2,7 +2,7 @@
 
 const { ServiceProvider } = require('@adonisjs/fold')
 
-class ExistProvider extends ServiceProvider {
+class ValidatorExtendProvider extends ServiceProvider {
   /**
    * Register namespaces to the IoC container
    *
@@ -11,7 +11,8 @@ class ExistProvider extends ServiceProvider {
    * @return {void}
    */
   register () {
-    //
+    this.Database = use('Database')
+    this.Validator = use('Validator')
   }
 
   /**
@@ -23,22 +24,30 @@ class ExistProvider extends ServiceProvider {
    * @return {void}
    */
   boot () {
-    const Validator = use('Validator')
-    const Database = use('Database')
+    this.exists()
+  }
 
+  exists () {
     const existsFn = async (data, field, message, args, get) => {
       const value = get(data, field)
       if (!value) {
+        /**
+         * skip validation if value is not defined. `required` rule
+         * should take care of it.
+         */
         return
       }
+
       const [table, column] = args
-      const row = await Database.table(table).where(column, value).first()
+      const row = await this.Database.table(table).where(column, value).first()
+
       if (!row) {
         throw message
       }
     }
-    Validator.extend('exists', existsFn)
+
+    this.Validator.extend('exists', existsFn)
   }
 }
 
-module.exports = ExistProvider
+module.exports = ValidatorExtendProvider
