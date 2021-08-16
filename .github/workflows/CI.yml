@@ -37,7 +37,9 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-      working-directory: ${{env.working-directory}}
     - run: sudo npm install
+      working-directory: ${{ env.working-directory }}
     - run: cp .env.example .env
+      working-directory: ${{ env.working-directory }}
     - run: sudo npm run test
+      working-directory: ${{ env.working-directory }}
