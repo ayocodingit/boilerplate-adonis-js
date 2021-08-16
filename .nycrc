@@ -1,8 +1,0 @@
-{
-  "all": true,
-  "include": ["app/**"],
-  "reporter": [
-    "html"
-  ],
-  "report-dir": "report"
-}

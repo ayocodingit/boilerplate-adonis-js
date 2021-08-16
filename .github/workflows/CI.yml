@@ -5,8 +5,12 @@ name: CI
 on:
   pull_request:
     branches: [ master ]
+    paths:
+      - 'src/**'
   push:
     branches: [ master ]
+    paths:
+      - 'src/**'
 
 jobs:
   build:
@@ -22,15 +26,18 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-  coverage:
+  test:
     needs: [ build ]
-    name: coverage
+    name: test
     runs-on: ubuntu-latest
+    env: 
+      working-directory: ./src
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+      working-directory: ${{env.working-directory}}
     - run: sudo npm install
     - run: cp .env.example .env
     - run: sudo npm run test
