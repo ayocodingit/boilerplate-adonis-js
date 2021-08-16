@@ -2,6 +2,8 @@
 
 app=${DOCKER_APP:-app}
 
+cd ../src
+
 if [ "$app" = "app" ]; then
 
     echo "Running the app..."
