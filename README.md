@@ -1,2 +1,2 @@
 # Boilerplate adonis js
-Monorepo for backend service
+Singlerepo for backend service
