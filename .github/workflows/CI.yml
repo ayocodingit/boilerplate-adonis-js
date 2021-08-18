@@ -7,39 +7,42 @@ on:
     branches: [ master ]
     paths:
       - 'src/**'
+      - '.github/**'
   push:
     branches: [ master ]
     paths:
       - 'src/**'
+      - '.github/**'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test:
     strategy:
       matrix:
-        node-version: [14.x]
-
+        platform: [ ubuntu-latest ]
+        node: [ '14' ]
+    name: test/node ${{ matrix.node }}/${{ matrix.platform }}
+    runs-on: ${{ matrix.platform }}
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@master
       with:
-        node-version: ${{ matrix.node-version }}
-
-  test:
-    needs: [ build ]
-    name: test
+        node-version: ${{ matrix.node }}
+    - run: npm run install
+    - run: npm run test
+  coverage:
+    needs: [ test ]
+    name: coverage
     runs-on: ubuntu-latest
     env: 
       working-directory: ./src
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
+    - uses: actions/setup-node@master
       with:
-        node-version: ${{ matrix.node-version }}
-    - run: sudo npm install
-      working-directory: ${{ env.working-directory }}
-    - run: cp .env.example .env
-      working-directory: ${{ env.working-directory }}
-    - run: sudo npm run test
-      working-directory: ${{ env.working-directory }}
+        node-version: '14'
+    - run: npm run install
+    - uses: paambaati/codeclimate-action@v2.2.4
+      env:
+        CC_TEST_REPORTER_ID: {{ secrets.CC_TEST_REPORT_ID }}
+      with:
+        coverageCommand: npm run coverage
