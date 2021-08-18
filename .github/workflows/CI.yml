@@ -29,7 +29,7 @@ jobs:
     - uses: actions/setup-node@master
       with:
         node-version: ${{ matrix.node }}
-    - run: npm run install
+    - run: npm install
       working-directory: ${{ env.working-directory }}
     - run: npm run test
       working-directory: ${{ env.working-directory }}
@@ -44,7 +44,7 @@ jobs:
     - uses: actions/setup-node@master
       with:
         node-version: '14'
-    - run: npm run install
+    - run: npm install
       working-directory: ${{ env.working-directory }}
     - uses: paambaati/codeclimate-action@v2.2.4
       env:
