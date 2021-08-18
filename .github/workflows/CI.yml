@@ -48,6 +48,8 @@ jobs:
         node-version: '14'
     - run: npm install
       working-directory: ${{ env.working-directory }}
+    - run: cp .env.testing .env
+      working-directory: ${{ env.working-directory }}
     - uses: paambaati/codeclimate-action@v2.2.4
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORT_ID }}
