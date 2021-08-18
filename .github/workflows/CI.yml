@@ -28,13 +28,12 @@ jobs:
       working-directory: ${{ env.working-directory }}
     - run: cp .env.testing .env
       working-directory: ${{ env.working-directory }}
-    - run: npm run test
+    - run: npm run coverage
       working-directory: ${{ env.working-directory }}
     - uses: paambaati/codeclimate-action@v2.7.5
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORT_ID }}
       with:
-        coverageCommand: npm run coverage
         workingDirectory: ${{ env.working-directory }}
         coverageLocations: report/lcov.info:lcov
           
