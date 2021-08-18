@@ -16,19 +16,14 @@ on:
 
 jobs:
   test:
-    strategy:
-      matrix:
-        platform: [ ubuntu-latest ]
-        node: [ '14' ]
-    name: test/node ${{ matrix.node }}/${{ matrix.platform }}
-    runs-on: ${{ matrix.platform }}
+    runs-on: ubuntu-latest
     env: 
       working-directory: ./src
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
     - uses: actions/setup-node@master
       with:
-        node-version: ${{ matrix.node }}
+        node-version: '14'
     - run: npm install
       working-directory: ${{ env.working-directory }}
     - run: cp .env.testing .env
@@ -41,5 +36,5 @@ jobs:
       with:
         coverageCommand: npm run coverage
         workingDirectory: ${{ env.working-directory }}
-        coverageLocations: |
-          ${{github.workspace}}/src/report/lcov.info:lcov
+        coverageLocations: report/lcov.info:lcov
+          
