@@ -1,6 +1,12 @@
 {
   "all": true,
-  "include": ["app/**"],
+  "include": "app",
+  "exclude": [
+    "app/Exceptions",
+    "app/Middleware",
+    "app/Models/Traits/NoTimestamp.js",
+    "app/Jobs"
+  ],
   "reporter": [
     "lcov"
   ],
