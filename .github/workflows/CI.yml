@@ -31,6 +31,8 @@ jobs:
         node-version: ${{ matrix.node }}
     - run: npm install
       working-directory: ${{ env.working-directory }}
+    - run: cp .env.testing .env
+      working-directory: ${{ env.working-directory }}
     - run: npm run test
       working-directory: ${{ env.working-directory }}
   coverage:
