@@ -1,0 +1,6 @@
+src/node_modules
+src/npm-debug.log
+src/.ync_output
+src/report
+.git
+.gitignore

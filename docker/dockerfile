@@ -1,15 +1,11 @@
-FROM node:lts-alpine
+FROM node:14-slim
 
 WORKDIR /app
 
-COPY ../src .
+COPY src/ .
 
 RUN npm install
 
 EXPOSE 3333
 
-COPY docker-entrypoint .
-
-RUN chmod +x docker-entrypoint.sh
-
-ENTRYPOINT [ "docker-entrypoint.sh" ]
+CMD [ "npm", "run", "start" ]

@@ -40,11 +40,13 @@ services:
       context: .
       dockerfile: dockerfile-dev
     volumes:
-      - .:/app
+      - src/:/app
       - /app/node_modules
     restart: 'always'
     environment:
       PORT: 3330
+    env_file:
+      - src/.env
     ports:
       - "3330:3330"
     depends_on:

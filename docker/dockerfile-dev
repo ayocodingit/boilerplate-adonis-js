@@ -1,13 +1,11 @@
 FROM node:12
 
 ENV HOME=/app
-RUN mkdir /app
-
-RUN cd ../src 
+RUN mkdir /app 
 
 RUN apt-get update
 
-COPY package.json $HOME
+COPY src/package.json $HOME
 
 WORKDIR $HOME
 
