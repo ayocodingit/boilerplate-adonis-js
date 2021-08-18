@@ -22,13 +22,17 @@ jobs:
         node: [ '14' ]
     name: test/node ${{ matrix.node }}/${{ matrix.platform }}
     runs-on: ${{ matrix.platform }}
+    env: 
+      working-directory: ./src
     steps:
     - uses: actions/checkout@master
     - uses: actions/setup-node@master
       with:
         node-version: ${{ matrix.node }}
     - run: npm run install
+      working-directory: ${{ env.working-directory }}
     - run: npm run test
+      working-directory: ${{ env.working-directory }}
   coverage:
     needs: [ test ]
     name: coverage
@@ -41,8 +45,10 @@ jobs:
       with:
         node-version: '14'
     - run: npm run install
+      working-directory: ${{ env.working-directory }}
     - uses: paambaati/codeclimate-action@v2.2.4
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORT_ID }}
       with:
         coverageCommand: npm run coverage
+        working-directory: ${{ env.working-directory }}
