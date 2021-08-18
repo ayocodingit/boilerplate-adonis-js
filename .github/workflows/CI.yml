@@ -35,21 +35,6 @@ jobs:
       working-directory: ${{ env.working-directory }}
     - run: npm run test
       working-directory: ${{ env.working-directory }}
-  coverage:
-    needs: [ test ]
-    name: coverage
-    runs-on: ubuntu-latest
-    env: 
-      working-directory: ./src
-    steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@master
-      with:
-        node-version: '14'
-    - run: npm install
-      working-directory: ${{ env.working-directory }}
-    - run: cp .env.testing .env
-      working-directory: ${{ env.working-directory }}
     - uses: paambaati/codeclimate-action@v2.2.4
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORT_ID }}
