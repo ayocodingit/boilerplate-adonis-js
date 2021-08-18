@@ -40,6 +40,6 @@ jobs:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORT_ID }}
       with:
         coverageCommand: npm run coverage
-        working-directory: ${{ env.working-directory }}
+        workingDirectory: ${{ env.working-directory }}
         coverageLocations: |
           ${{github.workspace}}/src/report/lcov.info:lcov
