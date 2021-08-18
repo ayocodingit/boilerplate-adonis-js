@@ -8,6 +8,8 @@ RUN npm install
 
 EXPOSE 3333
 
+COPY docker-entrypoint .
+
 RUN chmod +x docker-entrypoint.sh
 
 ENTRYPOINT [ "docker-entrypoint.sh" ]
