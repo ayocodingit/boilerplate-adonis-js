@@ -9,7 +9,7 @@
     "dev": "nodemon server.js",
     "scheduler": "node ace run:scheduler",
     "test": "nyc --all node ace test",
-    "coverage": "npm run test && nyc report --reporter=text-lcov | node ./bin/coveralls.js --verbose",
+    "coverage": "npm run test && nyc report",
     "lint": "eslint --ext .js .",
     "lint:fix": "eslint --fix --ext .js ."
   },
