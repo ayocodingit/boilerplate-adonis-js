@@ -7,39 +7,39 @@ on:
     branches: [ master ]
     paths:
       - 'src/**'
+      - '.github/**'
   push:
     branches: [ master ]
     paths:
       - 'src/**'
+      - '.github/**'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test:
     strategy:
       matrix:
-        node-version: [14.x]
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-
-  test:
-    needs: [ build ]
-    name: test
-    runs-on: ubuntu-latest
+        platform: [ ubuntu-latest ]
+        node: [ '14' ]
+    name: test/node ${{ matrix.node }}/${{ matrix.platform }}
+    runs-on: ${{ matrix.platform }}
     env: 
       working-directory: ./src
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@master
       with:
-        node-version: ${{ matrix.node-version }}
-    - run: sudo npm install
+        node-version: ${{ matrix.node }}
+    - run: npm install
       working-directory: ${{ env.working-directory }}
-    - run: cp .env.example .env
+    - run: cp .env.testing .env
       working-directory: ${{ env.working-directory }}
-    - run: sudo npm run test
+    - run: npm run test
       working-directory: ${{ env.working-directory }}
+    - uses: paambaati/codeclimate-action@v2.7.5
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORT_ID }}
+      with:
+        coverageCommand: npm run coverage
+        workingDirectory: ${{ env.working-directory }}
+        coverageLocations: |
+          ${{github.workspace}}/src/report/lcov.info:lcov
