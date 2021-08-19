@@ -8,7 +8,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "scheduler": "node ace run:scheduler",
-    "test": "nyc --all node ace test",
+    "test": "node ace test",
     "coverage": "npm run test && nyc report",
     "lint": "eslint --ext .js .",
     "lint:fix": "eslint --fix --ext .js ."
@@ -52,8 +52,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "nodemon": "^2.0.12",
-    "nyc": "^15.1.0",
-    "prettier": "^2.3.2"
+    "nyc": "^15.1.0"
   },
   "autoload": {
     "App": "./app"
