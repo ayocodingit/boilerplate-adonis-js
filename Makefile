@@ -12,9 +12,6 @@ start:
 test:
 	${APP_PATH}; npm run test
 
-coverage:
-	${APP_PATH}; npm run coverage
-
 lint-fix:
 	${APP_PATH}; npm run lint:fix
 

@@ -28,7 +28,7 @@ jobs:
       working-directory: ${{ env.working-directory }}
     - run: cp .env.testing .env
       working-directory: ${{ env.working-directory }}
-    - run: npm run coverage
+    - run: npm run test
       working-directory: ${{ env.working-directory }}
     - uses: paambaati/codeclimate-action@v2.7.5
       env:
