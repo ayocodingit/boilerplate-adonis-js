@@ -41,8 +41,10 @@
     "adonis-sentry": "^2.1.4",
     "adonisjs-queue": "^0.1.10",
     "aws-sdk": "^2.960.0",
+    "google-auth-library": "^7.6.2",
     "http-status-codes": "^2.1.4",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

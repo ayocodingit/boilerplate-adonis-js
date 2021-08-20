@@ -12,7 +12,7 @@ start:
 test:
 	${APP_PATH}; npm run test
 
-lint-fix:
+lint:
 	${APP_PATH}; npm run lint:fix
 
 migrate:
