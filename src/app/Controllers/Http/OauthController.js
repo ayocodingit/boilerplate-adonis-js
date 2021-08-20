@@ -17,7 +17,7 @@ class OauthController {
       const token = await auth.generate(user)
       return response.json(token)
     } catch (error) {
-      console.log(error)
+      console.log(error.message)
       throw error
     }
   }
@@ -39,7 +39,7 @@ class OauthController {
       const token = await auth.generate(user)
       return response.json(token)
     } catch (error) {
-      console.log(error)
+      console.log(error.message)
       throw error
     }
   }
