@@ -4,6 +4,7 @@ const { OAuth2Client } = require('google-auth-library')
 const Config = use('Config')
 const User = use('App/Models/User')
 const { StatusCodes } = require('http-status-codes')
+const CustomException = require('../../Exceptions/CustomException')
 const Antl = use('Antl')
 const googleClientId = Config.get('service.google.clientId')
 const googleClient = new OAuth2Client(googleClientId)
@@ -16,7 +17,7 @@ class OauthController {
       const token = await auth.generate(user)
       return response.json(token)
     } catch (error) {
-      return response.status(StatusCodes.UNAUTHORIZED).json({ error: error.message })
+      return response.status(error.code).json({ error: error.message })
     }
   }
 
@@ -37,7 +38,7 @@ class OauthController {
       const token = await auth.generate(user)
       return response.json(token)
     } catch (error) {
-      return response.status(StatusCodes.BAD_REQUEST).json({ error: error.message })
+      return response.status(error.code).json({ error: error.message })
     }
   }
 
@@ -46,7 +47,7 @@ class OauthController {
       request.get('email') !== payload.email ||
       request.get('sub') !== payload.sub
     ) {
-      throw new Error(Antl.formatMessage('auth.user_not_exist'))
+      throw new CustomException(Antl.formatMessage('auth.register_not_match'), StatusCodes.UNAUTHORIZED)
     }
   }
 
@@ -57,7 +58,7 @@ class OauthController {
       .first()
 
     if (!user) {
-      throw new Error(Antl.formatMessage('auth.user_not_exist'))
+      throw new CustomException(Antl.formatMessage('auth.user_not_exist'), StatusCodes.UNAUTHORIZED)
     }
 
     return user
