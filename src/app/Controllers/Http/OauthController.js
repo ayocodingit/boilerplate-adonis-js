@@ -10,13 +10,14 @@ const googleClientId = Config.get('service.google.clientId')
 const googleClient = new OAuth2Client(googleClientId)
 
 class OauthController {
-  async logInWithGoogle ({ response, auth }) {
+  async signInWithGoogle ({ response, auth }) {
     try {
       const payload = await googleClient.getTokenInfo(auth.getAuthHeader())
       const user = await this.getUserByOauthCode(payload)
       const token = await auth.generate(user)
       return response.json(token)
     } catch (error) {
+      console.log(error)
       throw error
     }
   }
@@ -38,6 +39,7 @@ class OauthController {
       const token = await auth.generate(user)
       return response.json(token)
     } catch (error) {
+      console.log(error)
       throw error
     }
   }

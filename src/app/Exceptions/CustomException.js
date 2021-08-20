@@ -2,10 +2,6 @@
 
 const { LogicalException } = require('@adonisjs/generic-exceptions')
 
-class CustomException extends LogicalException {
-  constructor (message, code) {
-    super(message, code)
-  }
-}
+class CustomException extends LogicalException {}
 
 module.exports = CustomException
