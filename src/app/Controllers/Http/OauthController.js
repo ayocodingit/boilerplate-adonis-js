@@ -4,7 +4,7 @@ const { OAuth2Client } = require('google-auth-library')
 const Config = use('Config')
 const User = use('App/Models/User')
 const { StatusCodes } = require('http-status-codes')
-const CustomException = require('../../Exceptions/CustomException')
+const CustomException = use('App/Exceptions/CustomException')
 const Antl = use('Antl')
 const googleClientId = Config.get('service.google.clientId')
 const googleClient = new OAuth2Client(googleClientId)
@@ -17,7 +17,7 @@ class OauthController {
       const token = await auth.generate(user)
       return response.json(token)
     } catch (error) {
-      return response.status(error.code).json({ error: error.message })
+      throw error
     }
   }
 
@@ -38,7 +38,7 @@ class OauthController {
       const token = await auth.generate(user)
       return response.json(token)
     } catch (error) {
-      return response.status(error.code).json({ error: error.message })
+      throw error
     }
   }
 

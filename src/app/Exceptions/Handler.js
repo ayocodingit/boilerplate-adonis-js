@@ -32,7 +32,7 @@ class ExceptionHandler extends BaseExceptionHandler {
       error.message = getReasonPhrase(error.status)
     }
 
-    response.status(error.status).json(error.message)
+    response.status(error.status).json({ error: error.message })
   }
 
   /**

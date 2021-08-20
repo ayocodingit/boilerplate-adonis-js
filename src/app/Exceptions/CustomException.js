@@ -1,9 +1,10 @@
 'use strict'
 
-const CustomException = (message, code) => {
-  return {
-    code: code,
-    message: message
+const { LogicalException } = require('@adonisjs/generic-exceptions')
+
+class CustomException extends LogicalException {
+  constructor (message, code) {
+    super(message, code)
   }
 }
 
