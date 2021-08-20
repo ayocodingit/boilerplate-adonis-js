@@ -6,12 +6,12 @@ const User = use('App/Models/User')
 const { StatusCodes } = require('http-status-codes')
 const Antl = use('Antl')
 const googleClientId = Config.get('service.google.clientId')
-const client = new OAuth2Client(googleClientId)
+const googleClient = new OAuth2Client(googleClientId)
 
 class OauthController {
   async loginWithGoogle ({ response, auth }) {
     try {
-      const payload = await client.getTokenInfo(auth.getAuthHeader())
+      const payload = await googleClient.getTokenInfo(auth.getAuthHeader())
       const user = await this.getUserByOauthCode(payload)
       const token = await auth.generate(user)
       return response.json(token)
