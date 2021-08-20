@@ -22,6 +22,7 @@ class OauthController {
 
   async getUserByOauthCode (payload, isSignUp = false) {
     const user = await User.query().where('oauth_code', payload.sub).first()
+
     if (!user && !isSignUp) {
       throw new Error(Antl.formatMessage('auth.user_not_exist'))
     }
