@@ -73,8 +73,8 @@ module.exports = {
     password: 'password',
     options: {
       secret: Env.get('APP_KEY'),
-      algorithm: 'RS256',
-      expiresIn: 28800000
+      algorithm: Env.get('JWT_ALGORITHM', 'RS256'),
+      expiresIn: 60
     }
   },
 
