@@ -9,21 +9,43 @@ const googleClientId = Config.get('service.google.clientId')
 const googleClient = new OAuth2Client(googleClientId)
 
 class OauthController {
-  async loginWithGoogle ({ response, auth }) {
+  async logInWithGoogle ({ response, auth }) {
     try {
       const payload = await googleClient.getTokenInfo(auth.getAuthHeader())
       const user = await this.getUserByOauthCode(payload)
       const token = await auth.generate(user)
       return response.json(token)
     } catch (error) {
-      return response.status(StatusCodes.BAD_REQUEST).json({ error: error.message })
+      return response.status(StatusCodes.UNAUTHORIZED).json({ error: error.message })
     }
   }
 
-  async getUserByOauthCode (payload, isSignUp = false) {
-    const user = await User.query().where('oauth_code', payload.sub).first()
+  async signUpWithGoogle ({ response, auth, request }) {
+    try {
+      await googleClient.getTokenInfo(auth.getAuthHeader())
 
-    if (!user && !isSignUp) {
+      const user = new User()
+      user.email = request.get('email')
+      user.username = request.get('name')
+      user.avatar = request.get('picture')
+      user.oauth_code = request.get('sub')
+      user.role = request.get('role')
+      await user.save()
+
+      const token = await auth.generate(user)
+      return response.json(token)
+    } catch (error) {
+      return response.status(StatusCodes.UNAUTHORIZED).json({ error: error.message })
+    }
+  }
+
+  async getUserByOauthCode (payload) {
+    const user = await User.query()
+      .where('oauth_code', payload.sub)
+      .orWhere('email', payload.email)
+      .first()
+
+    if (!user) {
       throw new Error(Antl.formatMessage('auth.user_not_exist'))
     }
 

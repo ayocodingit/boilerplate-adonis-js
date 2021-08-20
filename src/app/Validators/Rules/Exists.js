@@ -1,4 +1,7 @@
-module.exports = (Database, Validator) => {
+const Database = use('Database')
+const Validator = use('Validator')
+
+module.exports = () => {
   const existsFn = async (data, field, message, args, get) => {
     const value = get(data, field)
     if (!value) {
