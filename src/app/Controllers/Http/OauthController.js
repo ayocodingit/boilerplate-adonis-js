@@ -22,7 +22,9 @@ class OauthController {
 
   async signUpWithGoogle ({ response, auth, request }) {
     try {
-      await googleClient.getTokenInfo(auth.getAuthHeader())
+      const payload = await googleClient.getTokenInfo(auth.getAuthHeader())
+
+      await this.checkValidSignUpGoogle(request, payload)
 
       const user = new User()
       user.email = request.get('email')
@@ -35,7 +37,16 @@ class OauthController {
       const token = await auth.generate(user)
       return response.json(token)
     } catch (error) {
-      return response.status(StatusCodes.UNAUTHORIZED).json({ error: error.message })
+      return response.status(StatusCodes.BAD_REQUEST).json({ error: error.message })
+    }
+  }
+
+  async checkValidSignUpGoogle (request, payload) {
+    if (
+      request.get('email') !== payload.email ||
+      request.get('sub') !== payload.sub
+    ) {
+      throw new Error(Antl.formatMessage('auth.user_not_exist'))
     }
   }
 
