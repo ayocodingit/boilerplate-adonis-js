@@ -13,8 +13,8 @@ class UserSchema extends Schema {
       table.string('password', 30).notNullable()
       table.string('avatar', 255)
       table.string('oauth_code', 30)
-      table.bigInteger('companyProfileId').index()
-      table.bigInteger('applicantId').index()
+      table.bigInteger('company_profile_id').index()
+      table.bigInteger('applicant_id').index()
       table.timestamps()
     })
   }

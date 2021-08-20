@@ -5,26 +5,25 @@ const Config = use('Config')
 const User = use('App/Models/User')
 const { StatusCodes } = require('http-status-codes')
 const Antl = use('Antl')
+const googleClientId = Config.get('service.google.clientId')
+const client = new OAuth2Client(googleClientId)
 
 class OauthController {
   async loginWithGoogle ({ response, auth }) {
-    const clientId = Config.get('service.google.clientId')
-    const client = new OAuth2Client(clientId)
-
     try {
       const payload = await client.getTokenInfo(auth.getAuthHeader())
-      const user = await this.getUserByOauthCode(payload.sub)
+      const user = await this.getUserByOauthCode(payload)
       const token = await auth.generate(user)
       return response.json(token)
     } catch (error) {
-      return response.status(StatusCodes.BAD_REQUEST).send({ error: error.message })
+      return response.status(StatusCodes.BAD_REQUEST).json({ error: error.message })
     }
   }
 
-  async getUserByOauthCode (oauthCode) {
-    const user = await User.query().where('oauthCode', oauthCode).first()
-    if (!user) {
-      throw new Error(Antl.formatMessage('auth.failed'))
+  async getUserByOauthCode (payload, isSignUp = false) {
+    const user = await User.query().where('oauth_code', payload.sub).first()
+    if (!user && !isSignUp) {
+      throw new Error(Antl.formatMessage('auth.user_not_exist'))
     }
 
     return user
