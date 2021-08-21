@@ -1,33 +1,9 @@
 'use strict'
 
-const Enum = require('enum')
+const BaseEnum = use('App/Enums/BaseEnum')
 
-const Enums = new Enum({
+module.exports = new BaseEnum({
   MASYARAKAT: 'masyarakat',
   ADMIN: 'admin',
   MITRA: 'mitra'
 })
-
-const getValues = () => {
-  const values = []
-  Enums.enums.forEach(function (enumItem) {
-    values.push(enumItem.value)
-  })
-
-  return values
-}
-
-const getKeys = () => {
-  const keys = []
-  Enums.enums.forEach(function (enumItem) {
-    keys.push(enumItem.key)
-  })
-
-  return keys
-}
-
-module.exports = {
-  Enums,
-  getValues,
-  getKeys
-}
