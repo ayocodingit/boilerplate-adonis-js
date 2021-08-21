@@ -2,7 +2,7 @@
 
 const Enum = require('enum')
 
-const RoleEnum = new Enum({
+const Enums = new Enum({
   MASYARAKAT: 'masyarakat',
   ADMIN: 'admin',
   MITRA: 'mitra'
@@ -10,7 +10,7 @@ const RoleEnum = new Enum({
 
 const getValues = () => {
   const values = []
-  RoleEnum.enums.forEach(function (enumItem) {
+  Enums.enums.forEach(function (enumItem) {
     values.push(enumItem.value)
   })
 
@@ -19,7 +19,7 @@ const getValues = () => {
 
 const getKeys = () => {
   const keys = []
-  RoleEnum.enums.forEach(function (enumItem) {
+  Enums.enums.forEach(function (enumItem) {
     keys.push(enumItem.key)
   })
 
@@ -27,7 +27,7 @@ const getKeys = () => {
 }
 
 module.exports = {
-  RoleEnum,
+  Enums,
   getValues,
   getKeys
 }
