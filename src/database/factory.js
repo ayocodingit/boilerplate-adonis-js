@@ -12,10 +12,16 @@
 */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-// const Factory = use('Factory')
+const Factory = use('Factory')
+const { getValues } = use('App/Enums/RoleEnum')
+const Config = use('Config')
 
-// Factory.blueprint('App/Models/User', (faker) => {
-//   return {
-//     username: faker.username()
-//   }
-// })
+Factory.blueprint('App/Models/User', (faker) => {
+  return {
+    email: faker.email(),
+    username: faker.username(),
+    role: faker.pickone(getValues()),
+    password: Config.get('app.appKey'),
+    avatar: faker.avatar()
+  }
+})

@@ -41,6 +41,7 @@
     "adonis-sentry": "^2.1.4",
     "adonisjs-queue": "^0.1.10",
     "aws-sdk": "^2.960.0",
+    "enum": "^3.0.4",
     "google-auth-library": "^7.6.2",
     "http-status-codes": "^2.1.4",
     "jsonwebtoken": "^8.5.1",

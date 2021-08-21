@@ -63,6 +63,10 @@ class OauthController {
       throw new CustomException(Antl.formatMessage('auth.user_not_exist'), StatusCodes.UNAUTHORIZED)
     }
 
+    if (!user.oauth_code) {
+      await User.update({ oauth_code: payload.sub })
+    }
+
     return user
   }
 }
