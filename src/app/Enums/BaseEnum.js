@@ -9,7 +9,6 @@ class BaseEnum {
 
   getArray (option = 'key') {
     const enums = []
-
     this.enum.enums.forEach(function (enumItem) {
       enums.push(enumItem[option])
     })
