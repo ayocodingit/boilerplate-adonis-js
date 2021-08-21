@@ -7,22 +7,14 @@ class BaseEnum {
     this.enum = new Enum(enums)
   }
 
-  getValues () {
-    const values = []
+  getArray (option = 'key') {
+    const enums = []
+
     this.enum.enums.forEach(function (enumItem) {
-      values.push(enumItem.value)
+      enums.push(enumItem[option])
     })
 
-    return values
-  }
-
-  getKeys () {
-    const keys = []
-    this.enum.enums.forEach(function (enumItem) {
-      keys.push(enumItem.key)
-    })
-
-    return keys
+    return enums
   }
 }
 

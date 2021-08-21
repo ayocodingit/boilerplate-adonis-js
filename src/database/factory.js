@@ -20,7 +20,7 @@ Factory.blueprint('App/Models/User', (faker) => {
   return {
     email: faker.email(),
     username: faker.username(),
-    role: faker.pickone(RoleEnum.getValues()),
+    role: faker.pickone(RoleEnum.getArray('value')),
     password: Config.get('app.appKey'),
     avatar: faker.avatar()
   }
