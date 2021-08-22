@@ -1,6 +1,5 @@
 'use strict'
 
-const { formatters } = use('Validator')
 const Antl = use('Antl')
 const { StatusCodes } = require('http-status-codes')
 
@@ -25,12 +24,10 @@ class UserRequest {
     }
   }
 
-  get formatter () {
-    return formatters.JsonApi
-  }
-
   async fails (errorMessages) {
-    return this.ctx.response.status(StatusCodes.UNPROCESSABLE_ENTITY).json(errorMessages)
+    return this.ctx.response
+      .status(StatusCodes.UNPROCESSABLE_ENTITY)
+      .json({ errors: errorMessages })
   }
 }
 
