@@ -2,3 +2,4 @@ version: "2"
 exclude_patterns:
 - "src/config"
 - "src/test"
+- "src/app/Validators"
