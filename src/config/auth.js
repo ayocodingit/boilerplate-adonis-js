@@ -75,7 +75,7 @@ module.exports = {
       algorithm: Env.get('JWT_ALGORITHM', 'HS256'),
       secret: Env.get('JWT_SECRET', Env.get('APP_KEY')),
       // public: Env.get('JWT_PUBLIC'),
-      expiresIn: 3600000
+      expiresIn: 3600
     }
   },
 
