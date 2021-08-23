@@ -54,7 +54,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "nodemon": "^2.0.12",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "sqlite3": "^5.0.2"
   },
   "autoload": {
     "App": "./app"
