@@ -73,8 +73,9 @@ module.exports = {
     password: 'password',
     options: {
       algorithm: Env.get('JWT_ALGORITHM', 'HS256'),
-      secret: Env.get('JWT_SECRET', Env.get('APP_KEY')),
-      // public: Env.get('JWT_PUBLIC'),
+      // if use algorithm RS256
+      // secret: Buffer.from(Env.get('JWT_SECRET').replace(/\\n/g, '\n'), 'utf8'),
+      // public: Buffer.from(Env.get('JWT_PUBLIC').replace(/\\n/g, '\n'), 'utf8'),
       expiresIn: 3600
     }
   },
