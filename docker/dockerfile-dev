@@ -1,13 +1,8 @@
-FROM node:12
+FROM node:14-slim
 
-ENV HOME=/app
-RUN mkdir /app 
-
-RUN apt-get update
+WORKDIR /app
 
 COPY src/package.json $HOME
-
-WORKDIR $HOME
 
 RUN npm install && npm i -g @adonisjs/cli && npm install -g nodemon
 

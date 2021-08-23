@@ -18,6 +18,8 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     networks:
       - adonis-network
+    env_file: 
+      - src/.env
 
   adonis-phpmyadmin:
     container_name: "${APP_NAME}_PMA"
@@ -33,6 +35,8 @@ services:
       - /phpmyadmin
     networks:
       - adonis-network
+    env_file: 
+      - src/.env
 
   adonis-app:
     container_name: "${APP_NAME}_APP"
