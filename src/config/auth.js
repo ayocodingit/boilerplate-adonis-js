@@ -3,6 +3,14 @@
 /** @type {import('@adonisjs/framework/src/Env')} */
 const Env = use('Env')
 
+const getBuffer = (secret) => {
+  if (Env.get('JWT_ALGORITHM') === 'RS256') {
+    return Buffer.from(secret.replace(/\\n/g, '\n'), 'utf8')
+  }
+
+  return secret
+}
+
 module.exports = {
   /*
   |--------------------------------------------------------------------------
@@ -69,13 +77,12 @@ module.exports = {
     serializer: 'lucid',
     model: 'App/Models/User',
     scheme: 'jwt',
-    uid: 'email',
+    uid: 'username',
     password: 'password',
     options: {
       algorithm: Env.get('JWT_ALGORITHM', 'HS256'),
-      // if use algorithm RS256
-      // secret: Buffer.from(Env.get('JWT_SECRET').replace(/\\n/g, '\n'), 'utf8'),
-      // public: Buffer.from(Env.get('JWT_PUBLIC').replace(/\\n/g, '\n'), 'utf8'),
+      secret: getBuffer(Env.get('JWT_SECRET', Env.get('APP_KEY'))),
+      // public: getBuffer(Env.get('JWT_PUBLIC')),
       expiresIn: 3600
     }
   },
