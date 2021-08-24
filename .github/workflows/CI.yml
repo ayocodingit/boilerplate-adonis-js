@@ -34,24 +34,20 @@ jobs:
     
     - name: Run Npm Install    
       run: npm install
-      # working-directory: ${{ env.working-directory }}
 
     - name: Copy Env Testing
       run: cp .env.testing .env
-      # working-directory: ${{ env.working-directory }}
 
     - name: Create Database 
       run: touch database/testing.sqlite
-      # working-directory: ${{ env.working-directory }}
 
     - name: Run Testing
       run: npm run test
-      # working-directory: ${{ env.working-directory }}
 
     - name: Set Up Codeclimate and Send Report Codeclimate 
       uses: paambaati/codeclimate-action@v2.7.5
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORT_ID }}
       with:
-        # workingDirectory: ${{ env.working-directory }}
+        workingDirectory: ${{ env.working-directory }}
         coverageLocations: report/lcov.info:lcov
