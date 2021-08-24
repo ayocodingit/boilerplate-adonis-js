@@ -1,7 +1,7 @@
 'use strict'
 
 const Antl = use('Antl')
-const failResponse = use('Utils/Validators')
+const failResponse = use('utils/Validators')
 
 class UserRequest {
   get validateAll () {

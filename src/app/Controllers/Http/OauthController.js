@@ -8,7 +8,7 @@ const CustomException = use('App/Exceptions/CustomException')
 const Antl = use('Antl')
 const googleClientId = Config.get('service.google.clientId')
 const googleClient = new OAuth2Client(googleClientId)
-const { generateToken } = use('Utils/Models')
+const { generateToken } = use('utils/Models')
 
 class OauthController {
   async signInWithGoogle ({ response, auth }) {

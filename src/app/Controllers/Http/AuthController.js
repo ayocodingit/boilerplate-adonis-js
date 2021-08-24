@@ -1,6 +1,6 @@
 'use strict'
 
-const { responseToken } = use('Utils/Models')
+const { responseToken } = use('utils/Models')
 
 class AuthController {
   async login ({ request, response, auth }) {

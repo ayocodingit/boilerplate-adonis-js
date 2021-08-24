@@ -1,6 +1,6 @@
 'use strict'
 
-const Enums = use('Utils/Enums')
+const Enums = use('utils/Enums')
 
 module.exports = new Enums({
   MASYARAKAT: 'masyarakat',
