@@ -21,8 +21,6 @@ defaults:
 jobs:
   test:
     runs-on: ubuntu-latest
-    env: 
-      working-directory: ./src
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -49,5 +47,5 @@ jobs:
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORT_ID }}
       with:
-        workingDirectory: ${{ env.working-directory }}
+        workingDirectory: src
         coverageLocations: report/lcov.info:lcov
