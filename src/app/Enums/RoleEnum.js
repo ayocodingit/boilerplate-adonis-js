@@ -1,8 +1,8 @@
 'use strict'
 
-const BaseEnum = use('App/Enums/BaseEnum')
+const Enums = use('Common/Enums')
 
-module.exports = new BaseEnum({
+module.exports = new Enums({
   MASYARAKAT: 'masyarakat',
   ADMIN: 'admin',
   MITRA: 'mitra'

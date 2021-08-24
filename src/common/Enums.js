@@ -2,7 +2,7 @@
 
 const Enum = require('enum')
 
-class BaseEnum {
+class Enums {
   constructor (enums) {
     this.enums = new Enum(enums)
   }
@@ -25,4 +25,4 @@ class BaseEnum {
   }
 }
 
-module.exports = BaseEnum
+module.exports = Enums

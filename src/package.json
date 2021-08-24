@@ -58,6 +58,7 @@
     "sqlite3": "^5.0.2"
   },
   "autoload": {
-    "App": "./app"
+    "App": "./app",
+    "Common": "./common"
   }
 }
