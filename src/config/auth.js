@@ -1,8 +1,6 @@
 'use strict'
 
-/** @type {import('@adonisjs/framework/src/Env')} */
-const Env = use('Env')
-const { convertBuffer } = use('Utils/Converts')
+const jwtConfig = use('Utils/JWT')
 
 module.exports = {
   /*
@@ -72,12 +70,7 @@ module.exports = {
     scheme: 'jwt',
     uid: 'username',
     password: 'password',
-    options: {
-      algorithm: Env.get('JWT_ALGORITHM', 'HS256'),
-      secret: convertBuffer(Env.get('JWT_SECRET', Env.get('APP_KEY'))),
-      public: convertBuffer(Env.get('JWT_PUBLIC')),
-      expiresIn: 3600
-    }
+    options: jwtConfig
   },
 
   /*
