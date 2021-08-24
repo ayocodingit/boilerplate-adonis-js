@@ -2,7 +2,7 @@
 
 const Env = use('Env')
 
-const getBuffer = (secret) => {
+const convertBuffer = (secret) => {
   if (Env.get('JWT_ALGORITHM') === 'RS256') {
     return Buffer.from(secret.replace(/\\n/g, '\n'), 'utf8')
   }
@@ -11,5 +11,5 @@ const getBuffer = (secret) => {
 }
 
 module.exports = {
-  getBuffer
+  convertBuffer
 }
