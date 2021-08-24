@@ -49,7 +49,7 @@ jobs:
       # working-directory: ${{ env.working-directory }}
 
     - name: Set Up Codeclimate and Send Report Codeclimate 
-    - uses: paambaati/codeclimate-action@v2.7.5
+      uses: paambaati/codeclimate-action@v2.7.5
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORT_ID }}
       with:
