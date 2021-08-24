@@ -34,6 +34,7 @@ class OauthController {
       user.avatar = request.get('picture')
       user.oauth_code = request.get('sub')
       user.role = request.get('role')
+      user.password = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
       await user.save()
 
       const token = await auth.generate(user)
