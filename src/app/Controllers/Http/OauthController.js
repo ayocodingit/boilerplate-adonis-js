@@ -14,7 +14,7 @@ class OauthController {
     try {
       const payload = await googleClient.getTokenInfo(auth.getAuthHeader())
       const user = await this.getUserByOauthCode(payload)
-      const token = await auth.generate(user)
+      const token = await auth.withRefreshToken().generate(user)
       return response.json(token)
     } catch (error) {
       console.log(error.message)
@@ -29,15 +29,15 @@ class OauthController {
       await this.checkValidSignUpGoogle(request, payload)
 
       const user = new User()
-      user.email = request.get('email')
-      user.username = request.get('name')
-      user.avatar = request.get('picture')
-      user.oauth_code = request.get('sub')
-      user.role = request.get('role')
+      user.email = request.input('email')
+      user.username = request.input('name')
+      user.avatar = request.input('picture')
+      user.oauth_code = request.input('sub')
+      user.role = request.input('role')
       user.password = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
       await user.save()
 
-      const token = await auth.generate(user)
+      const token = await auth.withRefreshToken().generate(user)
       return response.json(token)
     } catch (error) {
       console.log(error.message)
@@ -47,8 +47,8 @@ class OauthController {
 
   async checkValidSignUpGoogle (request, payload) {
     if (
-      request.get('email') !== payload.email ||
-      request.get('sub') !== payload.sub
+      request.input('email') != payload.email ||
+      request.input('sub') != payload.sub
     ) {
       throw new CustomException(Antl.formatMessage('auth.register_not_match'), StatusCodes.UNAUTHORIZED)
     }
