@@ -17,4 +17,7 @@
 const Route = use('Route')
 
 Route.get('/', 'HomeController.index')
-Route.get('/api', 'HomeController.index')
+Route.get('api', 'HomeController.index')
+
+Route.post('api/login-with-google', 'OauthController.signInWithGoogle')
+Route.post('api/signup-with-google', 'OauthController.signInWithGoogle')
