@@ -59,6 +59,6 @@
   },
   "autoload": {
     "App": "./app",
-    "Common": "./common"
+    "Utils": "./utils"
   }
 }

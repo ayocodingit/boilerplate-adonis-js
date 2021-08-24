@@ -17,7 +17,9 @@
 const Route = use('Route')
 
 Route.get('/', 'HomeController.index')
-Route.get('api', 'HomeController.index')
 
-Route.post('api/login-with-google', 'OauthController.signInWithGoogle')
-Route.post('api/signup-with-google', 'OauthController.signUpWithGoogle')
+Route.group(() => {
+  Route.get('/', 'HomeController.index')
+  Route.post('login-with-google', 'OauthController.signInWithGoogle')
+  Route.post('signup-with-google', 'OauthController.signUpWithGoogle')
+}).prefix('api')

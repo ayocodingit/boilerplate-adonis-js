@@ -2,7 +2,7 @@
 
 /** @type {import('@adonisjs/framework/src/Env')} */
 const Env = use('Env')
-const { convertBuffer } = use('Common/Converts')
+const { convertBuffer } = use('Utils/Converts')
 
 module.exports = {
   /*
@@ -75,7 +75,7 @@ module.exports = {
     options: {
       algorithm: Env.get('JWT_ALGORITHM', 'HS256'),
       secret: convertBuffer(Env.get('JWT_SECRET', Env.get('APP_KEY'))),
-      // public: convertBuffer(Env.get('JWT_PUBLIC')),
+      public: convertBuffer(Env.get('JWT_PUBLIC')),
       expiresIn: 3600
     }
   },

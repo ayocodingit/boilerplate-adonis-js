@@ -26,9 +26,13 @@ const destroy = async (id, model) => {
   return { message: 'Deleted' }
 }
 
-const responseToken = async (auth, token) => {
-  const token = token
-  token.user = await auth.getUser()
+const generateToken = async (auth, user) => {
+  const token = await auth.withRefreshToken().generate(user)
+  return responseToken(user, token)
+}
+
+const responseToken = async (user, token) => {
+  token.user = user
   return token
 }
 
@@ -38,5 +42,6 @@ module.exports = {
   show,
   update,
   destroy,
+  generateToken,
   responseToken
 }

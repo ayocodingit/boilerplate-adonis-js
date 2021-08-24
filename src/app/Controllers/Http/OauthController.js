@@ -8,15 +8,14 @@ const CustomException = use('App/Exceptions/CustomException')
 const Antl = use('Antl')
 const googleClientId = Config.get('service.google.clientId')
 const googleClient = new OAuth2Client(googleClientId)
-const { responseToken } = use('Common/Models')
+const { generateToken } = use('Utils/Models')
 
 class OauthController {
   async signInWithGoogle ({ response, auth }) {
     try {
       const payload = await googleClient.getTokenInfo(auth.getAuthHeader())
       const user = await this.getUserByOauthCode(payload)
-      const token = await auth.withRefreshToken().generate(user)
-      return response.json(await responseToken(auth, token))
+      return response.json(await generateToken(auth, user))
     } catch (error) {
       console.log(error.message)
       throw error
@@ -35,11 +34,10 @@ class OauthController {
       user.avatar = request.input('picture')
       user.oauth_code = request.input('sub')
       user.role = request.input('role')
-      user.password = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+      user.password = Math.random().toString(36).substring(2, 15)
       await user.save()
 
-      const token = await auth.withRefreshToken().generate(user)
-      return response.json(await responseToken(auth, token))
+      return response.json(await generateToken(auth, user))
     } catch (error) {
       console.log(error.message)
       throw error
@@ -48,8 +46,8 @@ class OauthController {
 
   async checkValidSignUpGoogle (request, payload) {
     if (
-      request.input('email') != payload.email ||
-      request.input('sub') != payload.sub
+      request.input('email') !== payload.email ||
+      request.input('sub') !== payload.sub
     ) {
       throw new CustomException(Antl.formatMessage('auth.register_not_match'), StatusCodes.UNAUTHORIZED)
     }
