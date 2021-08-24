@@ -8,14 +8,15 @@ const CustomException = use('App/Exceptions/CustomException')
 const Antl = use('Antl')
 const googleClientId = Config.get('service.google.clientId')
 const googleClient = new OAuth2Client(googleClientId)
-const { generateToken } = use('Common/Models')
+const { responseToken } = use('Common/Models')
 
 class OauthController {
   async signInWithGoogle ({ response, auth }) {
     try {
       const payload = await googleClient.getTokenInfo(auth.getAuthHeader())
       const user = await this.getUserByOauthCode(payload)
-      return response.json(await generateToken(auth, user))
+      const token = await auth.withRefreshToken().generate(user)
+      return response.json(await responseToken(auth, token))
     } catch (error) {
       console.log(error.message)
       throw error
@@ -37,7 +38,8 @@ class OauthController {
       user.password = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
       await user.save()
 
-      return response.json(await generateToken(auth, user))
+      const token = await auth.withRefreshToken().generate(user)
+      return response.json(await responseToken(auth, token))
     } catch (error) {
       console.log(error.message)
       throw error
