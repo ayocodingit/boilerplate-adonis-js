@@ -13,7 +13,7 @@ const { generateToken } = use('Utils/Models')
 class OauthController {
   async signInWithGoogle ({ response, auth }) {
     try {
-      const payload = await googleClient.getTokenInfo(auth.getAuthHeader())
+      const payload = await this.getTokenInfoGoogle(auth)
       const user = await this.getUserByOauthCode(payload)
       return response.json(await generateToken(auth, user))
     } catch (error) {
@@ -24,7 +24,7 @@ class OauthController {
 
   async signUpWithGoogle ({ response, auth, request }) {
     try {
-      const payload = await googleClient.getTokenInfo(auth.getAuthHeader())
+      const payload = await this.getTokenInfoGoogle(auth)
 
       await this.checkValidSignUpGoogle(request, payload)
 
@@ -41,6 +41,14 @@ class OauthController {
     } catch (error) {
       console.log(error.message)
       throw error
+    }
+  }
+
+  async getTokenInfoGoogle (auth) {
+    try {
+      return await googleClient.getTokenInfo(auth.getAuthHeader())
+    } catch (error) {
+      throw new CustomException(error.message, StatusCodes.UNAUTHORIZED)
     }
   }
 
