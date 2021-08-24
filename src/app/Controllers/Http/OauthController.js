@@ -72,7 +72,8 @@ class OauthController {
     }
 
     if (!user.oauth_code) {
-      await User.update({ oauth_code: payload.sub })
+      user.oauth_code = payload.sub
+      await user.save()
     }
 
     return user
