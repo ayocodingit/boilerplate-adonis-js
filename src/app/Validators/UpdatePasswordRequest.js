@@ -10,7 +10,7 @@ class UpdatePasswordRequest {
 
   get rules () {
     return {
-      password: 'required|confirmed',
+      password: 'required|confirmed'
     }
   }
 
