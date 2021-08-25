@@ -2,7 +2,7 @@ FROM node:14-slim
 
 WORKDIR /app
 
-COPY src/package.json $HOME
+COPY src/package.json .
 
 RUN npm install && npm i -g @adonisjs/cli && npm install -g nodemon
 
