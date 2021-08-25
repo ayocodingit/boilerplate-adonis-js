@@ -15,7 +15,7 @@ $ https://github.com/ayocodingit/boilerplate-adonis-js
 $ cd boilerplate-adonis-js
 $ make copy-env
 $ make migrate
-$ make docker-run
+$ make seed
 ```
 
 Start the server (optional if running without docker):
