@@ -25,9 +25,6 @@ migrate:
 seed:
 	${APP_PATH}; node ace seed
 
-copy-env:
-	${APP_PATH}; cp .env.example .env
-
 docker-build:
 	docker build -f ${DOCKER_FILE_PATH} -t ${APP_NAME} --no-cache .
 

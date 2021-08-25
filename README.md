@@ -13,7 +13,7 @@ Clone project and install dependencies:
 ```bash
 $ https://github.com/ayocodingit/boilerplate-adonis-js
 $ cd boilerplate-adonis-js
-$ make copy-env
+$ (cd ./src && cp .env.example .env)
 $ make install
 $ make migrate
 $ make seed
