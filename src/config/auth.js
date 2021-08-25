@@ -1,6 +1,6 @@
 'use strict'
 
-const jwtConfig = use('utils/JWT')
+const jwtConfig = use('utils/Jwt')
 
 module.exports = {
   /*

@@ -14,7 +14,7 @@ const jwtConfig = () => {
   const options = {
     algorithm: Env.get('JWT_ALGORITHM', 'HS256'),
     secret: convertBuffer(Env.get('JWT_SECRET', Env.get('APP_KEY'))),
-    expiresIn: Env.get('JWT_TTL', 3600)
+    expiresIn: parseInt(Env.get('JWT_TTL', 3600))
   }
 
   if (Env.get('JWT_ALGORITHM') === 'RS256') {

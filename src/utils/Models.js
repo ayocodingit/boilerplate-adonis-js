@@ -27,7 +27,7 @@ const destroy = async (id, model) => {
 }
 
 const generateToken = async (auth, user) => {
-  const token = await auth.withRefreshToken().generate(user)
+  const token = await auth.withRefreshToken().generate(user, true)
   return responseToken(user, token)
 }
 
