@@ -4,6 +4,9 @@ APP_PATH := cd ./src
 DOCKER_FILE_PATH := ./docker/dockerfile
 ENV_PATH := ./src/.env
 
+install:	
+	${APP_PATH}; npm install
+
 dev:	
 	${APP_PATH}; npm run dev
 
