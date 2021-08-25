@@ -21,8 +21,8 @@ Route.get('/api', 'HomeController.index')
 
 Route.group(() => {
   Route.post('login-with-google', 'OauthController.signInWithGoogle')
-  Route.post('signup-with-google', 'OauthController.signUpWithGoogle')
-  Route.post('login', 'AuthController.login').middleware('guest')
-  Route.post('refresh-token', 'AuthController.refreshToken').middleware('auth')
-  Route.post('logout', 'AuthController.logout').middleware('auth')
+  Route.post('signup-with-google', 'OauthController.signUpWithGoogle').validator('SignUpRequest')
+  Route.post('login', 'AuthController.login').middleware('guest').validator('LoginRequest')
+  Route.post('refresh-token', 'AuthController.refreshToken').middleware('auth').validator('RefreshTokenRequest')
+  Route.post('logout', 'AuthController.logout').middleware('auth').validator('RefreshTokenRequest')
 }).prefix('api')
