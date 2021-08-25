@@ -14,7 +14,7 @@ class SignUpRequest {
       email: 'required|email|unique:users,email',
       sub: 'required|unique:users,oauth_code',
       name: 'required',
-      role: `required|in:${RoleEnum.getString('value')}`,
+      role: `required|in:${RoleEnum.getString('value')}`
     }
   }
 
@@ -27,7 +27,7 @@ class SignUpRequest {
       'sub.unique': Antl.formatMessage('validation.unique', { attribute: 'sub' }),
       'name.required': Antl.formatMessage('validation.required', { attribute: 'name' }),
       'role.required': Antl.formatMessage('validation.required', { attribute: 'role' }),
-      'role.in': Antl.formatMessage('validation.in', { attribute: 'role', other: RoleEnum.getStringWithSpace('value') }),
+      'role.in': Antl.formatMessage('validation.in', { attribute: 'role', other: RoleEnum.getStringWithSpace('value') })
     }
   }
 

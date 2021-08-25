@@ -19,10 +19,12 @@ const Route = use('Route')
 Route.get('/', 'HomeController.index')
 Route.get('/api', 'HomeController.index')
 
+// Authentication User
 Route.group(() => {
   Route.post('login-with-google', 'OauthController.signInWithGoogle')
   Route.post('signup-with-google', 'OauthController.signUpWithGoogle').validator('SignUpRequest')
   Route.post('login', 'AuthController.login').middleware('guest').validator('LoginRequest')
   Route.post('refresh-token', 'AuthController.refreshToken').middleware('auth').validator('RefreshTokenRequest')
   Route.post('logout', 'AuthController.logout').middleware('auth').validator('RefreshTokenRequest')
+  Route.post('update-password', 'SettingController.updatePassword').middleware('auth').validator('UpdatePasswordRequest')
 }).prefix('api')
