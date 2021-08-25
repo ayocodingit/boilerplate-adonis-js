@@ -4,7 +4,6 @@ services:
   adonis-mysql:
     image: mysql
     container_name: "${APP_NAME}_MYSQL"
-    platform: 'linux/x86_64'
     ports:
       - '3366:3306'
     volumes:
@@ -42,13 +41,15 @@ services:
     container_name: "${APP_NAME}_APP"
     build:
       context: .
-      dockerfile: dockerfile-dev
+      dockerfile: docker/dockerfile-dev
     volumes:
-      - src/:/app
+      - ./src:/app
       - /app/node_modules
     restart: 'always'
     environment:
       PORT: 3330
+      DB_HOST: adonis-mysql
+      DB_PORT: 3306
     env_file:
       - src/.env
     ports:
