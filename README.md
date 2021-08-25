@@ -25,6 +25,11 @@ $ make start
 
 Start the server (optional if running with docker):
 ```bash
+$ make docker-run
+```
+
+Running On Locally by Docker 
+```bash
 $ make docker-run-dev
 ```
 
