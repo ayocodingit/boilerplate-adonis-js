@@ -53,35 +53,46 @@ $ make docker-stop
 ## Single Repo Structure
 ```
 ├── .github/
-  ├── workflows/
-    ├── ...
-├── docker/
-  ├── ...
-├── src/
-  ├── app/
-    ├── ...
-  ├── config/
-    ├── app.js
-    ├── auth.js
+  └── workflows/
     └── ...
-  ├── database/
-    ├── migrations/
-    ├── seeds/
-    └── factory.js
-  ├── public/
-  ├── resources/
-    ├── ...
-    └── views/
-  ├── storage/
-  ├── start/
-    ├── app.js
-    ├── kernel.js
-    └── routes.js
-  ├── test/
-  ├── utils/
-  ├── ace
-  ├── server.js
-  └── package.json
-├── ...
+├── docker/
+  └── ...
+├── k8s/
+  └── ...
+├── src/
+  └── Adonis Structure
+├── .codeclimate.yml
+├── Makefile
+├── docker-compose-dev.yml
+├── docker-compose.yml
+└── ...
+```
+
+## Adonis Structure
+```
+├── app/
+  └──...
+├── config/
+  ├── app.js
+  ├── auth.js
+  └── ...
+├── database/
+  ├── migrations/
+  ├── seeds/
+  └── factory.js
+├── public/
+├── resources/
+  ├── ...
+  └── views/
+├── storage/
+├── start/
+  ├── app.js
+  ├── kernel.js
+  └── routes.js
+├── test/
+├── utils/
+├── ace
+├── server.js
+└── package.json
 ```
 
