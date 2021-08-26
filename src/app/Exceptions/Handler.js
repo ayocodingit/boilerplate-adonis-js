@@ -27,7 +27,7 @@ class ExceptionHandler extends BaseExceptionHandler {
   async handle (error, { response }) {
     if (
       error.status >= StatusCodes.INTERNAL_SERVER_ERROR &&
-      Config.get('env') === 'production'
+      Config.get('app.env') === 'production'
     ) {
       error.message = getReasonPhrase(error.status)
     }
