@@ -11,32 +11,32 @@
 
 Clone project and install dependencies:
 ```bash
-$ https://github.com/ayocodingit/boilerplate-adonis-js
-$ cd boilerplate-adonis-js
-$ (cd ./src && cp .env.example .env)
-$ make install
-$ make migrate
-$ make seed
+https://github.com/ayocodingit/boilerplate-adonis-js
+cd boilerplate-adonis-js
+(cd ./src && cp .env.example .env)
+make install
+make migrate
+make seed
 ```
 
 Start the server (optional if running without docker):
 ```bash
-$ make start
+make start
 ```
 
 Start the server (optional if running with docker):
 ```bash
-$ make docker-run
+make docker-run
 ```
 
 Running On Locally by Docker 
 ```bash
-$ make docker-run-dev
+make docker-run-dev
 ```
 
 Run tests (tester apps):
 ```bash
-$ make test
+make test
 ```
 
 ## Project Structure
