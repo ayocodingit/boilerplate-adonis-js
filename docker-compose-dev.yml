@@ -17,25 +17,15 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     networks:
       - adonis-network
-    env_file: 
-      - src/.env
 
-  adonis-phpmyadmin:
-    container_name: "${APP_NAME}_PMA"
-    image: phpmyadmin/phpmyadmin
-    depends_on:
-      - adonis-mysql
-    environment:
-      PMA_HOST: adonis-mysql
-    ports:
-      - '8585:80'
-    restart: 'always'
-    volumes:
-      - /phpmyadmin
+  redis:
+    image: redis
+    container_name: "${APP_NAME}_REDIS"
+    restart: always
     networks:
       - adonis-network
-    env_file: 
-      - src/.env
+    expose:
+      - 6379
 
   adonis-app:
     container_name: "${APP_NAME}_APP"
@@ -49,12 +39,15 @@ services:
     environment:
       PORT: 3330
       DB_HOST: adonis-mysql
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
     env_file:
       - src/.env
     ports:
-      - "3330:3330"
+      - "${PORT}:${PORT}"
     depends_on:
       - adonis-mysql
+      - redis
     networks:
       - adonis-network
 
