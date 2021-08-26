@@ -1,9 +1,8 @@
 'use strict'
 
-const Enum = require('enum')
-
-class Enums {
+class Enum {
   constructor (enums) {
+    const Enum = require('enum')
     this.enums = new Enum(enums)
   }
 
@@ -25,4 +24,4 @@ class Enums {
   }
 }
 
-module.exports = Enums
+module.exports = Enum
