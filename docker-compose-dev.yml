@@ -19,13 +19,16 @@ services:
       - adonis-network
 
   redis:
-    image: redis
+    image: "redis:alpine"
     container_name: "${APP_NAME}_REDIS"
     restart: always
     networks:
       - adonis-network
-    expose:
-      - 6379
+    volumes:
+     - $PWD/redis:/var/lib/redis
+      - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "6379:6379"
 
   adonis-app:
     container_name: "${APP_NAME}_APP"
