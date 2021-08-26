@@ -1,6 +1,6 @@
 'use strict'
 
-const { responseToken } = use('utils/Models')
+const { responseToken } = use('utils/Jwt')
 const User = use('App/Models/User')
 
 class AuthController {

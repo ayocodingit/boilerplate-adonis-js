@@ -23,4 +23,18 @@ const jwtConfig = () => {
   return options
 }
 
-module.exports = jwtConfig()
+const generateToken = async (auth, user) => {
+  const token = await auth.withRefreshToken().generate(user, true)
+  return responseToken(user, token)
+}
+
+const responseToken = async (user, token) => {
+  token.user = user
+  return token
+}
+
+module.exports = {
+  jwtConfig: jwtConfig(),
+  generateToken,
+  responseToken
+}

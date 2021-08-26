@@ -26,22 +26,10 @@ const destroy = async (id, model) => {
   return { message: 'Deleted' }
 }
 
-const generateToken = async (auth, user) => {
-  const token = await auth.withRefreshToken().generate(user, true)
-  return responseToken(user, token)
-}
-
-const responseToken = async (user, token) => {
-  token.user = user
-  return token
-}
-
 module.exports = {
   paginate,
   store,
   show,
   update,
-  destroy,
-  generateToken,
-  responseToken
+  destroy
 }
