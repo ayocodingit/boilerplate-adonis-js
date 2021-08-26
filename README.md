@@ -82,6 +82,6 @@ $ make docker-stop
   ├── ace
   ├── server.js
   └── package.json
-├── src/
+├── ...
 ```
 
