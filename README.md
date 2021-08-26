@@ -50,33 +50,38 @@ stop
 $ make docker-stop
 ```
 
-## Project Structure
+## Single Repo Structure
 ```
-
-├── app/
+├── .github/
+  ├── workflows/
+    ├── ...
+├── docker/
   ├── ...
-├── config/
-  ├── app.js
-  ├── auth.js
-  └── ...
-├── database/
-  ├── migrations/
-  ├── seeds/
-  └── factory.js
-├── public/
-├── resources/
-  ├── ...
-  └── views/
-├── storage/
-├── start/
-  ├── app.js
-  ├── kernel.js
-  └── routes.js
-├── test/
-├── utils/
-├── ace
-├── server.js
-└── package.json
-
+├── src/
+  ├── app/
+    ├── ...
+  ├── config/
+    ├── app.js
+    ├── auth.js
+    └── ...
+  ├── database/
+    ├── migrations/
+    ├── seeds/
+    └── factory.js
+  ├── public/
+  ├── resources/
+    ├── ...
+    └── views/
+  ├── storage/
+  ├── start/
+    ├── app.js
+    ├── kernel.js
+    └── routes.js
+  ├── test/
+  ├── utils/
+  ├── ace
+  ├── server.js
+  └── package.json
+├── src/
 ```
 
