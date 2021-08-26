@@ -1,12 +1,14 @@
 'use strict'
 
 const { responseToken } = use('utils/Models')
+const User = use('App/Models/User')
 
 class AuthController {
   async login ({ request, response, auth }) {
     const { email, password } = request.all()
-    const token = await auth.withRefreshToken().attempt(email, password)
-    return response.json(await responseToken(await auth.getUser(), token))
+    const token = await auth.withRefreshToken().attempt(email, password, true)
+    const user = await User.findBy('email', email)
+    return response.json(await responseToken(user, token))
   }
 
   async refreshToken ({ request, response, auth }) {
