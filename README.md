@@ -14,56 +14,64 @@ Clone project and install dependencies:
 https://github.com/ayocodingit/boilerplate-adonis-js
 cd boilerplate-adonis-js
 (cd ./src && cp .env.example .env)
-make install
-make migrate
-make seed
 ```
 
-Run tests (tester app):
-```bash
-make test
+* Run manually
+```
+install dependencies
+$ make install
+migrate
+$ make migrate
+seed
+$ make seed
+test
+$ make test
 ```
 
-Start the server (optional if running without docker):
-```bash
-make start
+* Run on locally with docker :
+
+```
+start
+$ make docker-run-dev
+migrate
+$ make docker-run-dev-migrate
+test
+$ make docker-run-dev-test
+stop
+$ make docker-run-dev-stop
 ```
 
-Start the server (optional if running with docker):
-```bash
-make docker-run
+* Run on production with docker :
+
+```
+start
+$ make docker-run
+stop
+$ make docker-stop
 ```
 
-Stop the server (optional if running with docker):
-```bash
-make docker-stop
+## Repo Structure
+```
+├── .github/
+  └── workflows/
+    └── ...
+├── docker/
+  └── ...
+├── k8s/
+  └── ...
+├── src/
+  └── Adonis Structure
+├── .codeclimate.yml
+├── Makefile
+├── docker-compose-dev.yml
+├── docker-compose.yml
+└── ...
 ```
 
-Running On Locally by Docker 
-```bash
-make docker-run-dev
+## Adonis Structure
 ```
-
-Migrate On Locally by Docker 
-```bash
-make docker-run-dev-migrate
-```
-
-Stop On Locally by Docker 
-```bash
-make docker-run-dev-stop
-```
-
-Test On Locally by Docker
-```bash
-make docker-run-dev-test
-```
-
-## Project Structure
-```
-
 ├── app/
-  ├── ...
+  └──...
 ├── config/
   ├── app.js
   ├── auth.js
@@ -86,6 +94,5 @@ make docker-run-dev-test
 ├── ace
 ├── server.js
 └── package.json
-
 ```
 
