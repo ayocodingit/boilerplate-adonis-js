@@ -19,6 +19,11 @@ make migrate
 make seed
 ```
 
+Run tests (tester app):
+```bash
+make test
+```
+
 Start the server (optional if running without docker):
 ```bash
 make start
@@ -49,9 +54,9 @@ Stop On Locally by Docker
 make docker-run-dev-stop
 ```
 
-Run tests (tester apps):
+Test On Locally by Docker
 ```bash
-make test
+make docker-run-dev-test
 ```
 
 ## Project Structure
