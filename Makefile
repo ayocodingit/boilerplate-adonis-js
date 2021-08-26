@@ -32,7 +32,7 @@ docker-run:
 	docker-compose --env-file ${ENV_PATH} up
 
 docker-stop:
-	docker-compose down
+	docker-compose --env-file ${ENV_PATH} down
 
 docker-run-dev:
 	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} up
@@ -40,7 +40,8 @@ docker-run-dev:
 docker-run-dev-stop:
 	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} down
 
-
+docker-run-dev-migrate:
+	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} exec ${APP_NAME}_APP adonis migration:run
 
 
 
