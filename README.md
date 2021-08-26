@@ -50,7 +50,7 @@ stop
 $ make docker-stop
 ```
 
-## Single Repo Structure
+## Repo Structure
 ```
 ├── .github/
   └── workflows/
