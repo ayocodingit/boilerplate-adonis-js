@@ -29,9 +29,24 @@ Start the server (optional if running with docker):
 make docker-run
 ```
 
+Stop the server (optional if running with docker):
+```bash
+make docker-stop
+```
+
 Running On Locally by Docker 
 ```bash
 make docker-run-dev
+```
+
+Migrate On Locally by Docker 
+```bash
+make docker-run-dev-migrate
+```
+
+Stop On Locally by Docker 
+```bash
+make docker-run-dev-stop
 ```
 
 Run tests (tester apps):

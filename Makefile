@@ -41,7 +41,10 @@ docker-run-dev-stop:
 	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} down
 
 docker-run-dev-migrate:
-	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} exec ${APP_NAME}_APP adonis migration:run
+	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} exec ${APP_NAME}_APP node ace migration:run
+
+docker-run-dev-test:
+	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} exec ${APP_NAME}_APP npm run test
 
 
 
