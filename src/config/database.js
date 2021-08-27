@@ -57,10 +57,7 @@ module.exports = {
       password: Env.get('DB_PASSWORD', ''),
       database: Env.get('DB_DATABASE', 'adonis')
     },
-    debug: Env.get('DB_DEBUG', false),
-    tls: {
-      host: Env.get("DB_HOST"),
-    },
+    debug: Env.get('DB_DEBUG', false)
   },
 
   /*
