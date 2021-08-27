@@ -58,7 +58,7 @@ module.exports = {
       database: Env.get('DB_DATABASE', 'adonis')
     },
     debug: Env.get('DB_DEBUG', false),
-    pool: { min: 0, max: 7 }
+    pool: { min: 0, max: 10 }
   },
 
   /*
@@ -81,6 +81,6 @@ module.exports = {
       database: Env.get('DB_DATABASE', 'adonis')
     },
     debug: Env.get('DB_DEBUG', false),
-    pool: { min: 0, max: 7 }
+    pool: { min: 0, max: 10 }
   }
 }
