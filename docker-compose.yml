@@ -17,7 +17,7 @@ services:
     networks:
       - adonis-network
   
- redis:
+  redis:
     image: "redis:alpine"
     container_name: "${APP_NAME}_REDIS"
     restart: always
