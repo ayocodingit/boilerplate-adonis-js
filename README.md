@@ -11,7 +11,7 @@
 
 Clone project and install dependencies:
 ```bash
-https://github.com/ayocodingit/boilerplate-adonis-js
+git clone https://github.com/ayocodingit/boilerplate-adonis-js
 cd boilerplate-adonis-js
 (cd ./src && cp .env.example .env)
 ```
