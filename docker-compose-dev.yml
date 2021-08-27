@@ -8,7 +8,6 @@ services:
       - '3366:3306'
     volumes:
       - $PWD/data:/var/lib/mysql
-    restart: 'always'
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
@@ -21,14 +20,10 @@ services:
   redis:
     image: "redis:alpine"
     container_name: "${APP_NAME}_REDIS"
-    restart: always
     networks:
       - adonis-network
     volumes:
      - $PWD/redis:/var/lib/redis
-      - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
-    ports:
-      - "6379:6379"
 
   adonis-app:
     container_name: "${APP_NAME}_APP"
@@ -38,7 +33,6 @@ services:
     volumes:
       - ./src:/app
       - /app/node_modules
-    restart: 'always'
     environment:
       PORT: 3330
       DB_HOST: adonis-mysql
@@ -47,7 +41,7 @@ services:
     env_file:
       - src/.env
     ports:
-      - "${PORT}:${PORT}"
+      - "3330:3330"
     depends_on:
       - adonis-mysql
       - redis

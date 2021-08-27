@@ -3,7 +3,7 @@
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash')
 const UserHook = exports = module.exports = {}
-const uuidv4 = require('uuid/v4')
+const { v4: uuidv4 } = require('uuid')
 
 UserHook.password = async (user) => {
   if (user.dirty.password) {

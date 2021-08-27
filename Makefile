@@ -3,6 +3,7 @@ include ./src/.env
 APP_PATH := cd ./src
 DOCKER_FILE_PATH := ./docker/dockerfile
 ENV_PATH := ./src/.env
+DOCKER_APP_NAME := adonis-app
 
 install:	
 	${APP_PATH}; npm install
@@ -29,22 +30,25 @@ docker-build:
 	docker build -f ${DOCKER_FILE_PATH} -t ${APP_NAME} --no-cache .
 
 docker-run:
-	docker-compose --env-file ${ENV_PATH} up
+	docker-compose --env-file ${ENV_PATH} up -d
 
 docker-stop:
 	docker-compose --env-file ${ENV_PATH} down
 
 docker-run-dev:
-	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} up
+	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} up -d
 
 docker-run-dev-stop:
 	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} down
 
 docker-run-dev-migrate:
-	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} exec ${APP_NAME}_APP node ace migration:run
+	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} exec ${DOCKER_APP_NAME} node ace migration:run
+
+docker-run-dev-seed:
+	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} exec ${DOCKER_APP_NAME} node ace seed
 
 docker-run-dev-test:
-	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} exec ${APP_NAME}_APP npm run test
+	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} exec ${DOCKER_APP_NAME} npm run test
 
 
 

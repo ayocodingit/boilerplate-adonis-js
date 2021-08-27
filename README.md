@@ -35,6 +35,8 @@ start
 $ make docker-run-dev
 migrate
 $ make docker-run-dev-migrate
+seed
+$ make docker-run-dev-seed
 test
 $ make docker-run-dev-test
 stop
