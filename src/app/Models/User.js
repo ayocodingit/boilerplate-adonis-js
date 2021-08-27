@@ -10,10 +10,6 @@ class User extends Model {
     this.addHook('beforeCreate', 'UserHook.uuid')
   }
 
-  static get primaryKey () {
-    return 'sub'
-  }
-
   static get incrementing () {
     return false
   }
