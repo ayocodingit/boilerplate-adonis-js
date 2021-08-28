@@ -10,7 +10,6 @@ class TokensSchema extends Schema {
       table.uuid('user_id').references('id').inTable('users').onDelete('Cascade')
       table.string('token', 255).notNullable().unique().index()
       table.string('type', 80).notNullable()
-      table.boolean('is_revoked').defaultTo(false)
       table.timestamps()
     })
   }
