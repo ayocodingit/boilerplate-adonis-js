@@ -5,7 +5,7 @@ const Config = use('Config')
 const User = use('App/Models/User')
 const { StatusCodes } = require('http-status-codes')
 const CustomException = use('App/Exceptions/CustomException')
-const Antl = use('Antl')
+const { formatMessage } = use('Antl')
 const googleClientId = Config.get('service.google.clientId')
 const googleClient = new OAuth2Client(googleClientId)
 const { generateToken } = use('utils/Jwt')
@@ -57,7 +57,7 @@ class OauthController {
       request.input('email') !== payload.email ||
       request.input('sub') !== payload.sub
     ) {
-      throw new CustomException(Antl.formatMessage('auth.register_not_match'), StatusCodes.UNAUTHORIZED)
+      throw new CustomException(formatMessage('auth.register_not_match'), StatusCodes.UNAUTHORIZED)
     }
   }
 
@@ -68,7 +68,7 @@ class OauthController {
       .first()
 
     if (!user) {
-      throw new CustomException(Antl.formatMessage('auth.user_not_exist'), StatusCodes.UNAUTHORIZED)
+      throw new CustomException(formatMessage('auth.user_not_exist'), StatusCodes.UNAUTHORIZED)
     }
 
     if (!user.oauth_code) {

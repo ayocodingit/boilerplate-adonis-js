@@ -2,13 +2,19 @@
 
 const { responseToken } = use('utils/Jwt')
 const User = use('App/Models/User')
+const CustomException = use('App/Exceptions/CustomException')
+const { formatMessage } = use('Antl')
 
 class AuthController {
   async login ({ request, response, auth }) {
-    const { email, password } = request.all()
-    const token = await auth.withRefreshToken().attempt(email, password, true)
-    const user = await User.findBy('email', email)
-    return response.json(await responseToken(user, token))
+    try {
+      const { email, password } = request.all()
+      const token = await auth.withRefreshToken().attempt(email, password, true)
+      const user = await User.findBy('email', email)
+      return response.json(await responseToken(user, token))
+    } catch (error) {
+      throw new CustomException(formatMessage('auth.failed'), StatusCodes.UNAUTHORIZED)
+    }
   }
 
   async refreshToken ({ request, response, auth }) {

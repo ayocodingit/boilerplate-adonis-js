@@ -1,6 +1,6 @@
 'use strict'
 
-const Antl = use('Antl')
+const { formatMessage } = use('Antl')
 const { failResponse } = use('utils/Validators')
 const RoleEnum = use('App/Enums/RoleEnum')
 
@@ -20,14 +20,14 @@ class SignUpRequest {
 
   get messages () {
     return {
-      'email.required': Antl.formatMessage('validation.required', { attribute: 'email' }),
-      'email.email': Antl.formatMessage('validation.email', { attribute: 'email' }),
-      'email.unique': Antl.formatMessage('validation.unique', { attribute: 'email' }),
-      'sub.required': Antl.formatMessage('validation.required', { attribute: 'sub' }),
-      'sub.unique': Antl.formatMessage('validation.unique', { attribute: 'sub' }),
-      'name.required': Antl.formatMessage('validation.required', { attribute: 'name' }),
-      'role.required': Antl.formatMessage('validation.required', { attribute: 'role' }),
-      'role.in': Antl.formatMessage('validation.in', { attribute: 'role', other: RoleEnum.getStringWithSpace('value') })
+      'email.required': formatMessage('validation.required', { attribute: 'email' }),
+      'email.email': formatMessage('validation.email', { attribute: 'email' }),
+      'email.unique': formatMessage('validation.unique', { attribute: 'email' }),
+      'sub.required': formatMessage('validation.required', { attribute: 'sub' }),
+      'sub.unique': formatMessage('validation.unique', { attribute: 'sub' }),
+      'name.required': formatMessage('validation.required', { attribute: 'name' }),
+      'role.required': formatMessage('validation.required', { attribute: 'role' }),
+      'role.in': formatMessage('validation.in', { attribute: 'role', other: RoleEnum.getStringWithSpace('value') })
     }
   }
 

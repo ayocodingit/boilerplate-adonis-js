@@ -1,6 +1,6 @@
 'use strict'
 
-const Antl = use('Antl')
+const { formatMessage } = use('Antl')
 const { failResponse } = use('utils/Validators')
 
 class RefreshTokenRequest {
@@ -16,7 +16,7 @@ class RefreshTokenRequest {
 
   get messages () {
     return {
-      'refresh_token.required': Antl.formatMessage('validation.required', { attribute: 'refresh_token' })
+      'refresh_token.required': formatMessage('validation.required', { attribute: 'refresh_token' })
     }
   }
 

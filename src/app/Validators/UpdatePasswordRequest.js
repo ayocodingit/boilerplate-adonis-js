@@ -1,6 +1,6 @@
 'use strict'
 
-const Antl = use('Antl')
+const { formatMessage } = use('Antl')
 const { failResponse } = use('utils/Validators')
 
 class UpdatePasswordRequest {
@@ -16,8 +16,8 @@ class UpdatePasswordRequest {
 
   get messages () {
     return {
-      'password.required': Antl.formatMessage('validation.required', { attribute: 'password' }),
-      'password.confirmed': Antl.formatMessage('validation.confirmed', { attribute: 'password' })
+      'password.required': formatMessage('validation.required', { attribute: 'password' }),
+      'password.confirmed': formatMessage('validation.confirmed', { attribute: 'password' })
     }
   }
 

@@ -1,6 +1,6 @@
 'use strict'
 
-const Antl = use('Antl')
+const { formatMessage } = use('Antl')
 const { StatusCodes } = require('http-status-codes')
 const Token = use('App/Models/Token')
 const CustomException = use('App/Exceptions/CustomException')
@@ -24,11 +24,11 @@ class Jwt {
 
   async checkTokenInvalid (token) {
     if (!token) {
-      throw new CustomException(Antl.formatMessage('auth.jwt_invalid'), StatusCodes.UNAUTHORIZED)
+      throw new CustomException(formatMessage('auth.jwt_invalid'), StatusCodes.UNAUTHORIZED)
     }
     if (token.is_revoked) {
       await Token.query().where('user_id', user.id).delete()
-      throw new CustomException(Antl.formatMessage('auth.jwt_invalid'), StatusCodes.UNAUTHORIZED)
+      throw new CustomException(formatMessage('auth.jwt_invalid'), StatusCodes.UNAUTHORIZED)
     }
   }
 }
