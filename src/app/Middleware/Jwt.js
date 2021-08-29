@@ -27,7 +27,7 @@ class Jwt {
       throw new CustomException(Antl.formatMessage('auth.jwt_invalid'), StatusCodes.UNAUTHORIZED)
     }
     if (token.is_revoked) {
-      await token.delete()
+      await Token.query().where('user_id', user.id).delete()
       throw new CustomException(Antl.formatMessage('auth.jwt_invalid'), StatusCodes.UNAUTHORIZED)
     }
   }
