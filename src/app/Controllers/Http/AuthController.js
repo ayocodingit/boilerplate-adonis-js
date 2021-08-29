@@ -3,6 +3,7 @@
 const { responseToken } = use('utils/Jwt')
 const User = use('App/Models/User')
 const CustomException = use('App/Exceptions/CustomException')
+const { StatusCodes } = require('http-status-codes')
 const { formatMessage } = use('Antl')
 
 class AuthController {

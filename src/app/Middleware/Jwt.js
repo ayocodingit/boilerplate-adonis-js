@@ -14,7 +14,7 @@ class Jwt {
     try {
       const user = await auth.getUser()
       const token = await Token.query().where('user_id', user.id).orderBy('created_at', 'desc').first()
-      await this.checkTokenInvalid(token)
+      await this.checkTokenInvalid(token, user)
       await next()
     } catch (error) {
       console.log(error)
@@ -22,7 +22,7 @@ class Jwt {
     }
   }
 
-  async checkTokenInvalid (token) {
+  async checkTokenInvalid (token, user) {
     if (!token) {
       throw new CustomException(formatMessage('auth.jwt_invalid'), StatusCodes.UNAUTHORIZED)
     }
