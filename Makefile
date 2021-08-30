@@ -41,6 +41,9 @@ docker-run-dev:
 docker-run-dev-stop:
 	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} down
 
+docker-run-dev-install:
+	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} exec ${DOCKER_APP_NAME} npm install
+
 docker-run-dev-migrate:
 	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} exec ${DOCKER_APP_NAME} node ace migration:run
 

@@ -37,6 +37,7 @@
     "@adonisjs/validator": "^5.1.0",
     "@adonisjs/vow": "^1.0.17",
     "@radmen/adonis-lucid-soft-deletes": "^0.2.0",
+    "adonis-guard": "^1.0.0-beta.5",
     "adonis-scheduler": "^3.0.2",
     "adonis-sentry": "^2.1.4",
     "adonisjs-queue": "^0.1.10",

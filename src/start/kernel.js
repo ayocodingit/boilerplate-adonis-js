@@ -17,7 +17,9 @@ const globalMiddleware = [
   'App/Middleware/ConvertEmptyStringsToNull',
   'Adonis/Middleware/Session',
   'Adonis/Middleware/Shield',
-  'App/Middleware/SentryTransaction'
+  'App/Middleware/SentryTransaction',
+  'Adonis/Middleware/AuthInit',
+  'Adonis/Middleware/GuardInit',
 ]
 
 /*
@@ -40,7 +42,8 @@ const globalMiddleware = [
 const namedMiddleware = {
   auth: 'Adonis/Middleware/Auth',
   guest: 'Adonis/Middleware/AllowGuestOnly',
-  jwt: 'App/Middleware/Jwt'
+  jwt: 'App/Middleware/Jwt',
+  can: 'Adonis/Middleware/Can',
 }
 
 /*
