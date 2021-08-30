@@ -24,6 +24,7 @@ Route.group(() => {
   Route.post('login-with-google', 'OauthController.signInWithGoogle')
   Route.post('signup-with-google', 'OauthController.signUpWithGoogle').validator('SignUpRequest')
   Route.post('login', 'AuthController.login').middleware('guest').validator('LoginRequest')
+  Route.get('user', 'AuthController.user').middleware('jwt')
   Route.post('refresh-token', 'AuthController.refreshToken').middleware('jwt').validator('RefreshTokenRequest')
   Route.post('logout', 'AuthController.logout').middleware('jwt').validator('RefreshTokenRequest')
   Route.post('update-password', 'SettingController.updatePassword').middleware('jwt').validator('UpdatePasswordRequest')

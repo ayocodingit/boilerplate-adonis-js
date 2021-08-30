@@ -29,6 +29,10 @@ class AuthController {
     await auth.revokeTokens([refreshToken], true)
     return response.json({ message: 'logout' })
   }
+
+  async user ({ response, auth }) {
+    return response.json(await auth.getUser())
+  }
 }
 
 module.exports = AuthController
