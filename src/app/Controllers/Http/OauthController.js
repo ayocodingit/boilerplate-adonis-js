@@ -37,7 +37,7 @@ class OauthController {
       user.password = Math.random().toString(36).substring(2, 15)
       await user.save()
 
-      return response.json(await generateToken(auth, user))
+      return response.json(await generateToken(auth, await user.reload))
     } catch (error) {
       console.log(error.message)
       throw error
