@@ -36,8 +36,7 @@ class OauthController {
       user.role = request.input('role')
       user.password = Math.random().toString(36).substring(2, 15)
       await user.save()
-
-      return response.json(await generateToken(auth, await user.reload))
+      return response.json(await generateToken(auth, user))
     } catch (error) {
       console.log(error.message)
       throw error
@@ -53,6 +52,7 @@ class OauthController {
   }
 
   async checkValidSignUpGoogle (request, payload) {
+    console.log(payload);
     if (
       request.input('email') !== payload.email ||
       request.input('sub') !== payload.sub

@@ -12,5 +12,5 @@ UserHook.password = async (user) => {
 }
 
 UserHook.uuid = async (user) => {
-  user.id = uuidv4()
+  user.uid = uuidv4()
 }

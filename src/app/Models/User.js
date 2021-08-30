@@ -14,6 +14,10 @@ class User extends Model {
     return false
   }
 
+  static get primaryKey () {
+    return 'uid'
+  }
+
   static get hidden () {
     return ['password', 'oauth_code']
   }
