@@ -7,7 +7,7 @@ class Enum {
     this.setKeyValue()
   }
 
-  setKeyValue() {
+  setKeyValue () {
     for (const enums of this.enums) {
       this[enums.key] = {
         value: enums.value,
