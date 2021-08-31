@@ -32,7 +32,6 @@ services:
       dockerfile: docker/dockerfile-dev
     volumes:
       - ./src:/app
-      - /app/node_modules
     environment:
       PORT: 3330
       DB_HOST: adonis-mysql

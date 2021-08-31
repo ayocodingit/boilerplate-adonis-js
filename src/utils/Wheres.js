@@ -1,8 +1,11 @@
+'use scrict'
+
 const when = (Model) => {
   Model.queryMacro('when', function (value, callback) {
     if (value) {
       callback(this)
     }
+
     return this
   })
 }
