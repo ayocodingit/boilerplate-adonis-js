@@ -3,3 +3,4 @@ exclude_patterns:
 - "src/config"
 - "src/test"
 - "src/app/Validators"
+- "src/utils/Wheres.js"

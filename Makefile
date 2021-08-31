@@ -30,13 +30,13 @@ docker-build:
 	docker build -f ${DOCKER_FILE_PATH} -t ${APP_NAME} --no-cache .
 
 docker-run:
-	docker-compose --env-file ${ENV_PATH} up -d
+	docker-compose --env-file ${ENV_PATH} up -d --build
 
 docker-stop:
 	docker-compose --env-file ${ENV_PATH} down
 
 docker-run-dev:
-	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} up -d
+	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} up -d --build --remove-orphans --force-recreate
 
 docker-run-dev-stop:
 	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} down
