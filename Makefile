@@ -36,7 +36,7 @@ docker-stop:
 	docker-compose --env-file ${ENV_PATH} down
 
 docker-run-dev:
-	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} up -d --build --remove-orphans --force-recreate
+	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} up -d
 
 docker-run-dev-stop:
 	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} down
