@@ -17,7 +17,7 @@ class Jwt {
       await this.checkTokenInvalid(token, user)
       await next()
     } catch (error) {
-      console.log(error)
+      console.log(error.message)
       throw error
     }
   }

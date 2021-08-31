@@ -52,7 +52,6 @@ class OauthController {
   }
 
   async checkValidSignUpGoogle (request, payload) {
-    console.log(payload)
     if (
       request.input('email') !== payload.email ||
       request.input('sub') !== payload.sub
