@@ -13,7 +13,7 @@ class Jwt {
   async handle ({ auth }, next) {
     try {
       const user = await auth.getUser()
-      const token = await Token.query().where('user_id', user.id).orderBy('created_at', 'desc').first()
+      const token = await Token.query().where('user_id', user.uid).orderBy('created_at', 'desc').first()
       await this.checkTokenInvalid(token, user)
       await next()
     } catch (error) {

@@ -37,6 +37,7 @@ docker-stop:
 
 docker-run-dev:
 	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} up -d
+	docker-run-dev-install
 
 docker-run-dev-stop:
 	docker-compose -f docker-compose-dev.yml --env-file ${ENV_PATH} down
