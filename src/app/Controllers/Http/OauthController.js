@@ -1,20 +1,16 @@
 'use strict'
 
-const { OAuth2Client } = require('google-auth-library')
-const Config = use('Config')
 const User = use('App/Models/User')
 const { StatusCodes } = require('http-status-codes')
 const CustomException = use('App/Exceptions/CustomException')
 const { formatMessage } = use('Antl')
-const googleClientId = Config.get('service.google.clientId')
-const googleClientSecret = Config.get('service.google.clientSecret')
-const googleClient = new OAuth2Client(googleClientId, googleClientSecret)
 const { generateToken } = use('utils/Jwt')
+const { getTokenInfoGoogle } = use('utils/Oauth')
 
 class OauthController {
   async signInWithGoogle ({ response, auth, request }) {
     try {
-      const payload = await this.getTokenInfoGoogle(request)
+      const payload = await getTokenInfoGoogle(request)
       const user = await this.getUserByOauthCode(payload)
       return response.json(await generateToken(auth, user))
     } catch (error) {
@@ -25,7 +21,7 @@ class OauthController {
 
   async signUpWithGoogle ({ response, auth, request }) {
     try {
-      const payload = await this.getTokenInfoGoogle(request)
+      const payload = await getTokenInfoGoogle(request)
 
       const user = new User()
       user.email = payload.email
@@ -39,21 +35,6 @@ class OauthController {
     } catch (error) {
       console.log(error.message)
       throw error
-    }
-  }
-
-  async getTokenInfoGoogle (request) {
-    try {
-      const payload = request.only(['code', 'redirect_uri'])
-      payload.codeVerifier = request.input('code_verifier')
-      const { tokens } = await googleClient.getToken(payload)
-      const ticket = await googleClient.verifyIdToken({
-        idToken: tokens.id_token,
-      });
-      return ticket.getPayload();
-    } catch (error) {
-      console.log(error.message)
-      throw new CustomException(error.message, StatusCodes.UNAUTHORIZED)
     }
   }
 

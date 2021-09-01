@@ -33,7 +33,7 @@ const whereDate = (Model) => {
     return this
   })
   Model.queryMacro('whereDateBetween', function (key, value) {
-    this.when(typeof value === Array && value.length === 2, query => {
+    this.when(value && value.length === 2, query => {
       query.whereRaw(`DATE(${key}) BETWEEN ? AND ?`, value)
     })
     return this
