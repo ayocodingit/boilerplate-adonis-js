@@ -11,7 +11,8 @@ class OauthController {
   async signInWithGoogle ({ response, auth, request }) {
     try {
       const payload = await getTokenInfoGoogle(request)
-      const user = await this.getUserByOauthCode(payload)
+      const user = await this.getUser(payload)
+      this.checkValidUser(user)
       return response.json(await generateToken(auth, user))
     } catch (error) {
       console.log(error.message)
@@ -22,9 +23,10 @@ class OauthController {
   async signUpWithGoogle ({ response, auth, request }) {
     try {
       const payload = await getTokenInfoGoogle(request)
-      await this.checkValidSignUpGoogle(payload)
+      let user = await this.getUser(payload)
+      this.checkValidUser(user, 'sign_up')
 
-      const user = new User()
+      user = new User()
       user.email = payload.email
       user.username = payload.name
       user.avatar = payload.picture
@@ -32,6 +34,7 @@ class OauthController {
       user.role = request.input('role')
       user.password = Math.random().toString(36).substring(2, 15)
       await user.save()
+
       return response.json(await generateToken(auth, user))
     } catch (error) {
       console.log(error.message)
@@ -39,35 +42,19 @@ class OauthController {
     }
   }
 
-  async checkValidSignUpGoogle (payload) {
-    const user = await User.query()
-      .where(query => {
-        query.where('oauth_code', payload.sub)
-          .orWhere('email', payload.email)
-      })
-      .first()
-
-    if (user) {
-      throw new CustomException(formatMessage('auth.user_exist'), StatusCodes.UNAUTHORIZED)
-    }
-  }
-
-  async getUserByOauthCode (payload) {
-    const user = await User.query()
+  async getUser (payload) {
+    return await User.query()
       .where('oauth_code', payload.sub)
       .orWhere('email', payload.email)
       .first()
+  }
 
-    if (!user) {
+  checkValidUser (user, authType = 'sign_in') {
+    if (user && authType === 'sign_up') {
+      throw new CustomException(formatMessage('auth.user_exist'), StatusCodes.UNAUTHORIZED)
+    } else if (!user && authType === 'sign_in') {
       throw new CustomException(formatMessage('auth.user_not_exist'), StatusCodes.UNAUTHORIZED)
     }
-
-    if (!user.oauth_code) {
-      user.oauth_code = payload.sub
-      await user.save()
-    }
-
-    return user
   }
 }
 
