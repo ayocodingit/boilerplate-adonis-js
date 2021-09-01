@@ -2,10 +2,10 @@
 
 const wheres = use('utils/Wheres')
 
-class WhereCustom {
+class Where {
   register (Model) {
     wheres(Model)
   }
 }
 
-module.exports = WhereCustom
+module.exports = Where
