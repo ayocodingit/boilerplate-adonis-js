@@ -18,7 +18,7 @@ class UpdatePasswordRequest {
     }
   }
 
-  get data () {
+  async get data () {
     const requestBody = this.ctx.request.all()
     const auth = await this.ctx.auth.getUser()
     const user = await User.query().setVisible(['password']).where('id', auth.id).first()
