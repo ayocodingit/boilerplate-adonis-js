@@ -8,11 +8,16 @@ const { formatMessage } = use('Antl')
 
 class SettingController {
   async updatePassword ({ auth, request, response }) {
-    const user = await auth.getUser()
-    await this.checkPasswordOld(user, request.input('password_old'))
-    user.password = request.input('password')
-    await user.save()
-    return response.json({ message: 'password updated' })
+    try {
+      const user = await auth.getUser()
+      await this.checkPasswordOld(user, request.input('password_old'))
+      user.password = request.input('password')
+      await user.save()
+      return response.json({ message: 'password updated' })
+    } catch (error) {
+      console.log(error.message);
+      throw error
+    }
   }
 
   async checkPasswordOld (user, password) {
