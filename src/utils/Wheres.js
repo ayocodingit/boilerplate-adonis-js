@@ -28,13 +28,13 @@ const whereBy = (Model) => {
 const whereDate = (Model) => {
   Model.queryMacro('whereDate', function (key, value, operator = '=') {
     this.when(value, query => {
-      query.whereRaw(`DATE(${key}) ${operator} ${value}`)
+      query.whereRaw(`DATE(${key}) ${operator} ?`, [value])
     })
     return this
   })
   Model.queryMacro('whereDateBetween', function (key, value) {
-    this.when(value, query => {
-      query.whereRaw(`DATE(${key}) BETWEEN ${value[0]} AND ${value[1]}`)
+    this.when(typeof value === Array && value.length === 2, query => {
+      query.whereRaw(`DATE(${key}) BETWEEN ? AND ?`, value)
     })
     return this
   })
