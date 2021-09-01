@@ -22,6 +22,7 @@ class OauthController {
   async signUpWithGoogle ({ response, auth, request }) {
     try {
       const payload = await getTokenInfoGoogle(request)
+      await this.checkValidSignUpGoogle(payload)
 
       const user = new User()
       user.email = payload.email
@@ -35,6 +36,19 @@ class OauthController {
     } catch (error) {
       console.log(error.message)
       throw error
+    }
+  }
+
+  async checkValidSignUpGoogle (payload) {
+    const user = await User.query()
+      .where(query => {
+        query.where('oauth_code', payload.sub)
+          .orWhere('email', payload.email)
+      })
+      .first()
+
+    if (user) {
+      throw new CustomException(formatMessage('auth.user_exist'), StatusCodes.UNAUTHORIZED)
     }
   }
 
