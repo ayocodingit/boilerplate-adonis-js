@@ -15,14 +15,14 @@ class SettingController {
       await user.save()
       return response.json({ message: 'password updated' })
     } catch (error) {
-      console.log(error.message);
+      console.log(error.message)
       throw error
     }
   }
 
   async checkPasswordOld (user, password) {
     const payload = await User.query().setVisible(['password']).where('uid', user.uid).first()
-    if (await Hash.verify(password, payload.password)) {
+    if (!await Hash.verify(password, payload.password)) {
       throw new CustomException(formatMessage('auth.password_old_not_match'), StatusCodes.FORBIDDEN)
     }
   }
