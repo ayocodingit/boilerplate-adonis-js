@@ -22,7 +22,7 @@ Route.get('/api', 'HomeController.index')
 // Authentication User
 Route.group(() => {
   Route.post('login-with-google', 'OauthController.signInWithGoogle').validator('GoogleRequest')
-  Route.post('signup-with-google', 'OauthController.signUpWithGoogle').validator(['GoogleRequest', 'SignUpRequest'])
+  Route.post('signup-with-google', 'OauthController.signUpWithGoogle').validator(['GoogleRequest'])
   Route.post('login', 'AuthController.login').middleware('guest').validator('LoginRequest')
   Route.get('user', 'AuthController.user').middleware('jwt')
   Route.post('refresh-token', 'AuthController.refreshToken').middleware('jwt').validator('RefreshTokenRequest')
