@@ -27,13 +27,11 @@ class OauthController {
     try {
       const payload = await this.getTokenInfoGoogle(request)
 
-      await this.checkValidSignUpGoogle(request, payload)
-
       const user = new User()
-      user.email = request.input('email')
-      user.username = request.input('name')
-      user.avatar = request.input('picture')
-      user.oauth_code = request.input('sub')
+      user.email = payload.email
+      user.username = payload.name
+      user.avatar = payload.picture
+      user.oauth_code = payload.sub
       user.role = request.input('role')
       user.password = Math.random().toString(36).substring(2, 15)
       await user.save()
@@ -49,19 +47,13 @@ class OauthController {
       const payload = request.only(['code', 'redirect_uri'])
       payload.codeVerifier = request.input('code_verifier')
       const { tokens } = await googleClient.getToken(payload)
-      return await googleClient.getTokenInfo(tokens.access_token)
+      const ticket = await googleClient.verifyIdToken({
+        idToken: tokens.id_token,
+      });
+      return ticket.getPayload();
     } catch (error) {
       console.log(error.message)
       throw new CustomException(error.message, StatusCodes.UNAUTHORIZED)
-    }
-  }
-
-  async checkValidSignUpGoogle (request, payload) {
-    if (
-      request.input('email') !== payload.email ||
-      request.input('sub') !== payload.sub
-    ) {
-      throw new CustomException(formatMessage('auth.register_not_match'), StatusCodes.UNAUTHORIZED)
     }
   }
 
