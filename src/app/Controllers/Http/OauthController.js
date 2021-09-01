@@ -48,11 +48,8 @@ class OauthController {
     try {
       const payload = request.only(['code', 'redirect_uri'])
       payload.codeVerifier = request.input('code_verifier')
-      const { tokens, res } = await googleClient.getToken(payload)
-      console.log(res);
-      const tokenInfo = await googleClient.getTokenInfo(tokens.access_token)
-      console.log(tokenInfo);
-      return tokenInfo
+      const { tokens } = await googleClient.getToken(payload)
+      return await googleClient.getTokenInfo(tokens.access_token)
     } catch (error) {
       console.log(error.message)
       throw new CustomException(error.message, StatusCodes.UNAUTHORIZED)
