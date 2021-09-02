@@ -13,6 +13,7 @@ class UserSchema extends Schema {
       table.string('password', 255).notNullable()
       table.string('avatar', 255)
       table.string('oauth_code', 30).unique()
+      table.boolean('is_active').defaultTo(false)
       table.timestamps()
     })
   }
