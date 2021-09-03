@@ -7,15 +7,11 @@ class User extends Model {
   static boot () {
     super.boot()
     this.addHook('beforeSave', 'UserHook.password')
-    this.addHook('beforeCreate', 'UserHook.uuid')
+    this.addHook('beforeCreate', 'UuidHook.generate')
   }
 
   static get incrementing () {
     return false
-  }
-
-  static get primaryKey () {
-    return 'uid'
   }
 
   static get hidden () {

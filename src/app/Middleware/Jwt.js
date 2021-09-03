@@ -13,7 +13,7 @@ class Jwt {
   async handle ({ auth }, next) {
     try {
       const user = await auth.getUser()
-      const token = await Token.query().where('user_id', user.uid).orderBy('created_at', 'desc').first()
+      const token = await Token.query().where('user_id', user.primaryKeyValue).orderBy('is_revoked', 'desc').first()
       await this.checkTokenInvalid(token, user)
       await next()
     } catch (error) {
@@ -27,7 +27,7 @@ class Jwt {
       throw new CustomException(formatMessage('auth.jwt_invalid'), StatusCodes.UNAUTHORIZED)
     }
     if (token.is_revoked) {
-      await Token.query().where('user_id', user.id).delete()
+      await Token.query().where('user_id', user.primaryKeyValue).delete()
       throw new CustomException(formatMessage('auth.jwt_invalid'), StatusCodes.UNAUTHORIZED)
     }
   }
