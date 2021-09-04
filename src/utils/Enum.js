@@ -55,11 +55,11 @@ class Enum {
     return this.keys.join(', ')
   }
 
-  make(value) {
+  make (value) {
     return this.#items.get(value)
   }
 
-  has(value) {
+  has (value) {
     return this.#items.has(value)
   }
 }
