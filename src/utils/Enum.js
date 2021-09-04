@@ -1,36 +1,53 @@
 'use strict'
 
+const Enums = require('enum')
+
 class Enum {
+  #items;
+  #enums;
+
   constructor (enums) {
-    const Enum = require('enum')
-    this.enums = new Enum(enums)
-    this.setKeyValue()
+    this.#items = new Enums(enums)
+    this.#enums = this.#items.enums
+    this.#setKeyValue()
   }
 
-  setKeyValue () {
-    for (const enums of this.enums) {
-      this[enums.key] = {
-        value: enums.value,
-        key: enums.key
+  #setKeyValue () {
+    this.#enums.forEach(enumItem => {
+      this[enumItem.key] = {
+        value: enumItem.value,
+        key: enumItem.key
       }
-    }
+    })
   }
 
-  getArray (option) {
-    const enums = []
-    this.enums.enums.forEach(function (enumItem) {
-      enums.push(enumItem[option])
+  #getArray (option) {
+    const items = []
+    this.#enums.forEach(function (enumItem) {
+      items.push(enumItem[option])
     })
 
-    return enums
+    return items
   }
 
-  getString (option) {
-    return this.getArray(option).toString()
+  get enum () {
+    return this.#items
   }
 
-  getStringWithSpace (option) {
-    return this.getArray(option).join(', ')
+  get values () {
+    return this.#getArray('value')
+  }
+
+  get keys () {
+    return this.#getArray('key')
+  }
+
+  get valuesString () {
+    return this.values.toString()
+  }
+
+  get valuesStringWithSpace () {
+    return this.values.join(', ')
   }
 }
 
