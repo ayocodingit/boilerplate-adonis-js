@@ -58,6 +58,10 @@ class Enum {
   make(value) {
     return this.#items.get(value)
   }
+
+  has(value) {
+    return this.#items.has(value)
+  }
 }
 
 module.exports = Enum
