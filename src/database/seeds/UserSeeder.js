@@ -17,7 +17,7 @@ class UserSeeder {
   async run () {
     await Factory
       .model('App/Models/User')
-      .createMany(10)
+      .create()
   }
 }
 

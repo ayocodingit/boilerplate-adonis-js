@@ -7,17 +7,14 @@ class Enum {
   #enums;
 
   constructor (enums) {
-    this.#items = new Enums(enums)
+    this.#items = new Enums(enums, { ignoreCase: true })
     this.#enums = this.#items.enums
     this.#setKeyValue()
   }
 
   #setKeyValue () {
     this.#enums.forEach(enumItem => {
-      this[enumItem.key] = {
-        value: enumItem.value,
-        key: enumItem.key
-      }
+      this[enumItem.key] = enumItem
     })
   }
 
@@ -48,6 +45,18 @@ class Enum {
 
   get valuesStringWithSpace () {
     return this.values.join(', ')
+  }
+
+  get keysString () {
+    return this.keys.toString()
+  }
+
+  get keysStringWithSpace () {
+    return this.keys.join(', ')
+  }
+
+  make(value) {
+    return this.#items.get(value)
   }
 }
 
