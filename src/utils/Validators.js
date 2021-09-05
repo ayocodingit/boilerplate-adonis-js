@@ -19,18 +19,24 @@ const formatMessage = (errorMessages) => {
 }
 
 const validatorMessage = (rules) => {
-  const { formatMessage } = use('Antl')
-  const messages = {}
+  let messages = {}
 
   for (const property in rules) {
     const rule = rules[property].split('|')
-    for (const keyRule of rule) {
-      const key = keyRule.split(':')[0]
-      if (!limitValidation.includes(key)) continue
+    messages = validatorMapping(rule, property, messages)
+  }
+  return messages
+}
+
+const validatorMapping = (rule, property, messages) => {
+  const { formatMessage } = use('Antl')
+
+  for (const keyRule of rule) {
+    const key = keyRule.split(':')[0]
+    if (limitValidation.includes(key)) {
       messages[`${property}.${key}`] = formatMessage(`validation.${key}`, { attribute: property })
     }
   }
-
   return messages
 }
 
