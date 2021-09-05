@@ -1,7 +1,7 @@
 'use strict'
 
 const { formatMessage } = use('Antl')
-const { failResponse } = use('utils/Validators')
+const { failResponse, validatorMessage } = use('utils/Validators')
 
 class GoogleRequest {
   get validateAll () {
@@ -17,12 +17,7 @@ class GoogleRequest {
   }
 
   get messages () {
-    return {
-      'code.required': formatMessage('validation.required', { attribute: 'code' }),
-      'redirect_uri.required': formatMessage('validation.email', { attribute: 'redirect_uri' }),
-      'redirect_uri.url': formatMessage('validation.url', { attribute: 'redirect_uri' }),
-      'code_verifier.required': formatMessage('validation.required', { attribute: 'code_verifier' })
-    }
+    return Object.assign({}, validatorMessage(this.rules))
   }
 
   async fails (errorMessages) {

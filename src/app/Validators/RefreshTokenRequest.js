@@ -1,7 +1,7 @@
 'use strict'
 
 const { formatMessage } = use('Antl')
-const { failResponse } = use('utils/Validators')
+const { failResponse, validatorMessage } = use('utils/Validators')
 
 class RefreshTokenRequest {
   get validateAll () {
@@ -15,9 +15,7 @@ class RefreshTokenRequest {
   }
 
   get messages () {
-    return {
-      'refresh_token.required': formatMessage('validation.required', { attribute: 'refresh_token' })
-    }
+    return Object.assign({}, validatorMessage(this.rules))
   }
 
   async fails (errorMessages) {

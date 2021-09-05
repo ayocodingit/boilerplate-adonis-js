@@ -1,7 +1,7 @@
 'use strict'
 
 const { formatMessage } = use('Antl')
-const { failResponse } = use('utils/Validators')
+const { failResponse, validatorMessage } = use('utils/Validators')
 const RoleEnum = use('App/Enums/RoleEnum')
 
 class SignUpRequest {
@@ -16,10 +16,9 @@ class SignUpRequest {
   }
 
   get messages () {
-    return {
-      'role.required': formatMessage('validation.required', { attribute: 'role' }),
+    return Object.assign({}, validatorMessage(this.rules), {
       'role.in': formatMessage('validation.in', { attribute: 'role', other: RoleEnum.getStringWithSpace('value') })
-    }
+    })
   }
 
   async fails (errorMessages) {
