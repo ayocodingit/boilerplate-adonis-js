@@ -1,6 +1,5 @@
 'use strict'
 
-const { formatMessage } = use('Antl')
 const { failResponse, validatorMessage } = use('utils/Validators')
 
 class GoogleRequest {
