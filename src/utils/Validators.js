@@ -22,17 +22,16 @@ const validatorMessage = (rules) => {
   let messages = {}
 
   for (const property in rules) {
-    const rule = rules[property].split('|')
-    messages = validatorMapping(rule, property, messages)
+    messages = validatorMapping(rules[property].split('|'), property, messages)
   }
   return messages
 }
 
-const validatorMapping = (rule, property, messages) => {
+const validatorMapping = (rules, property, messages) => {
   const { formatMessage } = use('Antl')
 
-  for (const keyRule of rule) {
-    const key = keyRule.split(':')[0]
+  for (const rule of rules) {
+    const key = rule.split(':')[0]
     if (limitValidation.includes(key)) {
       messages[`${property}.${key}`] = formatMessage(`validation.${key}`, { attribute: property })
     }
