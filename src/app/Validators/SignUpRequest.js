@@ -12,13 +12,13 @@ class SignUpRequest {
 
   get rules () {
     return {
-      role: `required|in:${RoleEnum.getString('value')}`
+      role: `required|in:${RoleEnum.valuesString}`
     }
   }
 
   get messages () {
     return Object.assign(validatorMessage(this.rules), {
-      'role.in': formatMessage('validation.in', { attribute: 'role', other: RoleEnum.getStringWithSpace('value') })
+      'role.in': formatMessage('validation.in', { attribute: 'role', other: RoleEnum.valuesStringWithSpace })
     })
   }
 
