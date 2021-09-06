@@ -1,6 +1,6 @@
 'use strict'
 
-const { responseToken } = use('utils/Jwt')
+const { responseToken, refreshToken } = use('utils/Jwt')
 const User = use('App/Models/User')
 const CustomException = use('App/Exceptions/CustomException')
 const { StatusCodes } = require('http-status-codes')
@@ -19,9 +19,8 @@ class AuthController {
   }
 
   async refreshToken ({ request, response, auth }) {
-    const refreshToken = request.input('refresh_token')
-    const token = await auth.generateForRefreshToken(refreshToken, true)
-    return response.json(await responseToken(await auth.getUser(), token))
+    const token = await refreshToken(auth, request.input('refresh_token'))
+    return response.json(token)
   }
 
   async logout ({ request, response, auth }) {

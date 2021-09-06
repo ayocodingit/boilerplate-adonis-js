@@ -1,7 +1,8 @@
 'use strict'
 
-const { failResponse, validatorMessage } = use('utils/Validators')
+const { failResponse } = use('utils/Validators')
 const Exists = use('utils/Rules/Exists')
+const validatorMessage = require('adonis-message-validation-generator')
 
 class LoginRequest {
   constructor () {
@@ -20,11 +21,11 @@ class LoginRequest {
   }
 
   get messages () {
-    return Object.assign({}, validatorMessage(this.rules))
+    return validatorMessage(this.rules)
   }
 
   async fails (errorMessages) {
-    return failResponse(this.ctx, errorMessages)
+    return failResponse(this.ctx.response, errorMessages)
   }
 }
 

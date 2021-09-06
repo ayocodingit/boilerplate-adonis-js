@@ -33,8 +33,13 @@ const responseToken = async (user, token) => {
   return token
 }
 
+const refreshToken = async (auth, refreshToken) => {
+  return await auth.generateForRefreshToken(refreshToken, true)
+}
+
 module.exports = {
   jwtConfig: jwtConfig(),
   generateToken,
-  responseToken
+  responseToken,
+  refreshToken
 }

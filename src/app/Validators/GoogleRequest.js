@@ -1,13 +1,14 @@
 'use strict'
 
-const { failResponse, validatorMessage } = use('utils/Validators')
+const validatorMessage = require('adonis-message-validation-generator')
+const { failResponse } = use('utils/Validators')
 
 class GoogleRequest {
   get validateAll () {
     return true
   }
 
-  get rules () {
+  static get rules () {
     return {
       code: 'required',
       redirect_uri: 'required|url',
@@ -15,12 +16,12 @@ class GoogleRequest {
     }
   }
 
-  get messages () {
-    return Object.assign({}, validatorMessage(this.rules))
+  static get messages () {
+    return validatorMessage(this.rules)
   }
 
   async fails (errorMessages) {
-    return failResponse(this.ctx, errorMessages)
+    return failResponse(this.ctx.response, errorMessages)
   }
 }
 

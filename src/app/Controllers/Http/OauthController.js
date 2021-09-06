@@ -4,12 +4,20 @@ const User = use('App/Models/User')
 const { StatusCodes } = require('http-status-codes')
 const CustomException = use('App/Exceptions/CustomException')
 const { formatMessage } = use('Antl')
-const { generateToken } = use('utils/Jwt')
+const { generateToken, refreshToken } = use('utils/Jwt')
 const { getTokenInfoGoogle } = use('utils/Oauth')
+const { validateAll } = use('Validator')
+const GoogleRequest = use('App/Validator/GoogleRequest')
+const { failResponse } = use('utils/Validators')
 
 class OauthController {
   async signInWithGoogle ({ response, auth, request }) {
     try {
+      if (request.input('refresh_token')) return await refreshToken(auth, request.input('refresh_token'))
+
+      const validation = await validateAll(request.all(), GoogleRequest.rules, GoogleRequest.messages)
+      if (validation.fails()) return failResponse(response, validation.messages())
+
       const payload = await getTokenInfoGoogle(request)
       const user = await this.getUser(payload)
       this.checkValidUser(user)
