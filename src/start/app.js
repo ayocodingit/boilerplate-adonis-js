@@ -10,6 +10,7 @@
 | provider here.
 |
 */
+const path = require('path')
 
 const providers = [
   '@adonisjs/framework/providers/AppProvider',
@@ -31,7 +32,8 @@ const providers = [
   'adonisjs-queue/providers/JobProvider',
   '@radmen/adonis-lucid-soft-deletes/providers/SoftDeletesProvider',
   '@adonisjs/redis/providers/RedisProvider',
-  'adonis-guard/providers/GuardProvider'
+  'adonis-guard/providers/GuardProvider',
+  path.join(__dirname, '..', 'providers/ValidatorProvider')
 ]
 
 /*

@@ -1,13 +1,10 @@
 'use strict'
 
-const { failResponse, validatorMessage } = use('utils/Validators')
+const { validatorMessage } = use('utils/Validators')
 const { formatMessage } = use('Antl')
+const Validator = use('utils/Validator')
 
-class UpdatePasswordRequest {
-  get validateAll () {
-    return true
-  }
-
+class UpdatePasswordRequest extends Validator {
   get rules () {
     return {
       password_old: 'required',
@@ -19,10 +16,6 @@ class UpdatePasswordRequest {
     return Object.assign(validatorMessage(this.rules), {
       'password.min': formatMessage('validator.min', { attribute: 'password', min: 6 })
     })
-  }
-
-  async fails (errorMessages) {
-    return failResponse(this.ctx.response, errorMessages)
   }
 }
 

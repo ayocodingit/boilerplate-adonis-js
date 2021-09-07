@@ -1,15 +1,11 @@
 'use strict'
 
 const { formatMessage } = use('Antl')
-const { failResponse } = use('utils/Validators')
 const RoleEnum = use('App/Enums/RoleEnum')
 const validatorMessage = require('adonis-message-validation-generator')
+const Validator = use('utils/Validator')
 
-class SignUpRequest {
-  get validateAll () {
-    return true
-  }
-
+class SignUpRequest extends Validator {
   get rules () {
     return {
       role: `required|in:${RoleEnum.valuesString}`
@@ -20,10 +16,6 @@ class SignUpRequest {
     return Object.assign(validatorMessage(this.rules), {
       'role.in': formatMessage('validation.in', { attribute: 'role', other: RoleEnum.valuesStringWithSpace })
     })
-  }
-
-  async fails (errorMessages) {
-    return failResponse(this.ctx.response, errorMessages)
   }
 }
 
