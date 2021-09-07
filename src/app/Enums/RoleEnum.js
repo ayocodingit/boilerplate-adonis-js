@@ -1,6 +1,6 @@
 'use strict'
 
-const Enum = use('utils/Enum')
+const Enum = require('adonis-enum')
 
 module.exports = new Enum({
   MASYARAKAT: 'masyarakat',
