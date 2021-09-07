@@ -7,7 +7,7 @@ const { formatMessage } = use('Antl')
 const { generateToken, refreshToken } = use('utils/Jwt')
 const { getTokenInfoGoogle } = use('utils/Oauth')
 const { validateAll } = use('Validator')
-const GoogleRequest = use('App/Validators/GoogleRequest')
+const GoogleRequest = new (use('App/Validators/GoogleRequest'))
 const { failResponse } = use('utils/Validators')
 
 class OauthController {
